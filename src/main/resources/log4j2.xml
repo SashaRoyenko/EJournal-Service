@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+  <Properties>
+    <Property name="LOG_DIR">logs</Property>
+    <Property name="LOG_NAME">EJournal.log</Property>
+    <Property
+      name="LOG_PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+    </Property>
+  </Properties>
+  <Appenders>
+    <!-- Console Appender -->
+    <Console name="STDOUT" target="SYSTEM_OUT">
+      <PatternLayout pattern="${LOG_PATTERN}"/>
+    </Console>
+
+    <!-- File Appender -->
+    <RollingFile
+      name="rollingFile"
+      fileName="${LOG_DIR}/${LOG_NAME}"
+      filePattern="${LOG_DIR}/${LOG_NAME}-%d{dd-MM}.log"
+      append="true"
+      ignoreExceptions="false">
+      <PatternLayout pattern="${LOG_PATTERN}"/>
+      <Policies>
+        <TimeBasedTriggeringPolicy/>
+        <CronTriggeringPolicy schedule="0 0 0 * * ?"/>
+      </Policies>
+      <DefaultRolloverStrategy>
+        <Delete basePath="${LOG_DIR}" maxDepth="1">
+          <IfFileName glob="${LOG_NAME}-*.log"/>
+          <IfLastModified age="30d"/>
+        </Delete>
+      </DefaultRolloverStrategy>
+    </RollingFile>
+  </Appenders>
+
+  <Loggers>
+    <Root level="info">
+      <AppenderRef ref="STDOUT"/>
+      <AppenderRef ref="rollingFile"/>
+    </Root>
+  </Loggers>
+</Configuration>
