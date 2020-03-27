@@ -9,18 +9,18 @@ import javax.persistence.ManyToOne;
 public class User {
     @Id
     @GeneratedValue
-    private Long id;
-    private String firstName;
+    protected Long id;
+    protected String firstName;
 
-    private String secondName;
+    protected String secondName;
 
-    private String lastName;
+    protected String lastName;
 
-    private String email;
+    protected String email;
 
-    private String password;
+    protected String password;
 
-    private String telephone;
+    protected String telephone;
     @ManyToOne
     private School school;
 }
