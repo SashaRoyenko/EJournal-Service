@@ -5,4 +5,13 @@ server:
 spring:
   application:
     name: '@project.artifactId@'
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/e-journal?serverTimezone=UTC
+    username: root
+    password:
+  jpa:
+    hibernate.ddl-auto: create
+    generate-ddl: true
+    show-sql: true
 
