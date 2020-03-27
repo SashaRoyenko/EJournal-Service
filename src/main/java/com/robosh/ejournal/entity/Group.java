@@ -1,20 +1,29 @@
 package com.robosh.ejournal.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 import java.util.List;
 
-@Entity
+@Data
+@NoArgsConstructor
+@Builder
+@Entity(name = "class_group")
 public class Group {
     @Id
     @GeneratedValue
     private Long id;
+
     private String code;
 
+    @OneToMany
     private List<Student> studentList;
 
+    @OneToOne
     private Teacher classTeacher;
 
+    @OneToOne
     private Schedule schedule;
 }

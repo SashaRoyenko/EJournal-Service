@@ -1,20 +1,27 @@
 package com.robosh.ejournal.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 import java.time.LocalDate;
+
+@Data
+@NoArgsConstructor
+@Builder
 @Entity
 public class Mark {
     @Id
     @GeneratedValue
     private Long id;
-    private int score;
 
+    private String score;
+    @OneToOne
     private Student student;
-
+    @OneToOne
     private Teacher teacher;
-
+    @OneToOne
     private Subject subject;
 
     private LocalDate date;

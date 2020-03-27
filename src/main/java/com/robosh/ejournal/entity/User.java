@@ -1,10 +1,18 @@
 package com.robosh.ejournal.entity;
 
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+@Data
+@NoArgsConstructor
+@Builder
 @Entity
 public class User {
     @Id
@@ -21,6 +29,7 @@ public class User {
     protected String password;
 
     protected String telephone;
+
     @ManyToOne
     private School school;
 }
