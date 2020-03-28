@@ -19,7 +19,7 @@ public class Teacher extends User {
 
     private String description;
 
-    @Builder(builderMethodName = "")
+    @Builder
     public Teacher(Long id, String firstName, String secondName, String lastName, String email, String password, String telephone, School school, Group group, String description) {
         super(id, firstName, secondName, lastName, email, password, telephone, school);
         this.group = group;
