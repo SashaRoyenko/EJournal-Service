@@ -1,6 +1,6 @@
 package com.robosh.ejournal.entity;
 
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 
 @Data
 @NoArgsConstructor
-@Builder
+@AllArgsConstructor
 @Entity
 public class User {
 
