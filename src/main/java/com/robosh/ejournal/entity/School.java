@@ -23,7 +23,7 @@ public class School {
 
     private String url;
 
-    private String departament;
+    private String department;
 
     private String region;
 
