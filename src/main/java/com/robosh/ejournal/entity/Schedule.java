@@ -10,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Data
@@ -23,6 +25,7 @@ public class Schedule {
     @GeneratedValue
     private Long id;
 
+    @NotNull
     @OneToOne
     private Group group;
 
