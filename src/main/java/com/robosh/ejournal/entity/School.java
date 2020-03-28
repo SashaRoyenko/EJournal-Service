@@ -1,5 +1,6 @@
 package com.robosh.ejournal.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,6 +12,7 @@ import javax.persistence.OneToOne;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Entity
 public class School {
@@ -23,7 +25,7 @@ public class School {
 
     private String url;
 
-    private String departament;
+    private String department;
 
     private String region;
 
