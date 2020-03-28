@@ -10,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import java.util.List;
 
 @Data
@@ -18,10 +20,13 @@ import java.util.List;
 @Builder
 @Entity(name = "class_group")
 public class Group {
+
     @Id
     @GeneratedValue
     private Long id;
 
+    @NotBlank
+    @Pattern(regexp = "\\d{1,2}[-]+[А-ЯЇ]")
     private String code;
 
     @OneToMany

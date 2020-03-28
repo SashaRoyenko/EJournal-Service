@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotBlank;
 
 @Data
 @NoArgsConstructor
@@ -21,14 +22,18 @@ public class School {
     @GeneratedValue
     private Long id;
 
+    @NotBlank
     private String name;
 
     private String url;
 
+    @NotBlank
     private String department;
 
+    @NotBlank
     private String region;
 
+    @NotBlank
     private String locality;
 
     @OneToOne

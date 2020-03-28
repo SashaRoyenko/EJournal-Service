@@ -1,5 +1,6 @@
 package com.robosh.ejournal.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,6 +10,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -19,6 +21,8 @@ import java.util.List;
 @Entity
 public class Student extends User {
 
+    @NotNull
+    @JsonFormat(pattern="dd-MM-yyyy")
     private LocalDate dateOfBirth;
 
     @OneToOne

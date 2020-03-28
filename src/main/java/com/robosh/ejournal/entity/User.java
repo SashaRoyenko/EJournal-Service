@@ -8,6 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @Data
 @NoArgsConstructor
@@ -19,18 +22,24 @@ public class User {
     @GeneratedValue
     protected Long id;
 
+    @NotBlank
     protected String firstName;
 
     protected String secondName;
 
+    @NotBlank
     protected String lastName;
 
+    @Pattern(regexp = "[A-Za-z0-9+_.-]+@[a-z.-]+\\.[a-z]{2,8}")
     protected String email;
 
+    //todo pattern
     protected String password;
 
-    protected String telephone;
+    @Pattern(regexp = "^\\+?3?8?(0\\d{9})$")
+    protected String phone;
 
+    @NotNull
     @ManyToOne
     protected School school;
 }
