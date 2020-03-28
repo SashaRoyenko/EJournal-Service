@@ -12,11 +12,14 @@ import java.util.List;
 @Builder
 @Entity
 public class Schedule {
+
     @Id
     @GeneratedValue
     private Long id;
+
     @OneToOne
     private Group group;
+
     @OneToMany
     private List<ScheduleItem> scheduleList;
 }

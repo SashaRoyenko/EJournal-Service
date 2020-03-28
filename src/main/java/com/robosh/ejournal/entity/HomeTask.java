@@ -15,11 +15,14 @@ import java.time.LocalDate;
 @Builder
 @Entity
 public class HomeTask {
+
     @Id
     @GeneratedValue
     private Long id;
+
     @OneToOne
     private Subject subject;
+
     @OneToOne
     private Group group;
 

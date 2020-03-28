@@ -6,13 +6,13 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
-
 import java.util.List;
 
 @Data
 @NoArgsConstructor
 @Entity
-public class Parent extends User{
+public class Parent extends User {
+
     @ManyToMany
     private List<Student> studentList;
 

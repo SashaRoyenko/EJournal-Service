@@ -4,7 +4,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import java.time.LocalDate;
 
 @Data
@@ -12,15 +15,19 @@ import java.time.LocalDate;
 @Builder
 @Entity
 public class Mark {
+
     @Id
     @GeneratedValue
     private Long id;
 
     private String score;
+
     @OneToOne
     private Student student;
+
     @OneToOne
     private Teacher teacher;
+
     @OneToOne
     private Subject subject;
 

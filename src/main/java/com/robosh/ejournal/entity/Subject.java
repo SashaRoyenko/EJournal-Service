@@ -11,6 +11,7 @@ import javax.persistence.Id;
 @NoArgsConstructor
 @Entity
 public class Subject {
+
     @Id
     @GeneratedValue
     private Long id;
