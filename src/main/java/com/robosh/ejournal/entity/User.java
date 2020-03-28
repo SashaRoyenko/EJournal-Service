@@ -32,5 +32,5 @@ public class User {
     protected String telephone;
 
     @ManyToOne
-    private School school;
+    protected School school;
 }
