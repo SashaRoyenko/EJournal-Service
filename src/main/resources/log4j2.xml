@@ -35,9 +35,24 @@
   </Appenders>
 
   <Loggers>
+
+    <!-- Log everything in hibernate -->
+    <Logger name="org.hibernate" level="info" additivity="false">
+      <AppenderRef ref="STDOUT" />
+      <AppenderRef ref="rollingFile" />
+    </Logger>
+
+    <!-- Log SQL statements -->
+    <Logger name="org.hibernate.SQL" level="debug" additivity="false">
+      <AppenderRef ref="STDOUT" />
+      <AppenderRef ref="rollingFile" />
+    </Logger>
+
     <Root level="info">
       <AppenderRef ref="STDOUT"/>
       <AppenderRef ref="rollingFile"/>
     </Root>
+
   </Loggers>
+
 </Configuration>
