@@ -5,9 +5,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
@@ -27,9 +30,14 @@ public class Group {
 
     @NotBlank
     @Pattern(regexp = "\\d{1,2}[-]+[А-ЯЇ]")
+    @Column(name = "code")
     private String code;
 
+
     @OneToMany
+    @JoinTable(name = "student_group",
+            joinColumns = @JoinColumn(name = "group_id"),
+            inverseJoinColumns = @JoinColumn(name = "student_list"))
     private List<Student> studentList;
 
     @OneToOne

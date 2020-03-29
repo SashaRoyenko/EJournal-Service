@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
@@ -18,11 +19,12 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
+@Entity(name = "student")
 public class Student extends User {
 
     @NotNull
     @JsonFormat(pattern="dd-MM-yyyy")
+    @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
 
     @OneToOne

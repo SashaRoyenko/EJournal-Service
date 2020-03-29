@@ -7,6 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
@@ -14,12 +15,13 @@ import javax.persistence.OneToOne;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
+@Entity(name = "teacher")
 public class Teacher extends User {
 
     @OneToOne
     private Group group;
 
+    @Column(name = "description")
     private String description;
 
     @Builder

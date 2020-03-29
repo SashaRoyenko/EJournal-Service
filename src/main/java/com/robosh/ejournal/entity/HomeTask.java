@@ -18,14 +18,13 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity
+@Entity(name = "home_task")
 public class HomeTask {
 
     @Id
     @GeneratedValue
     private Long id;
 
-    @Column
     @NotNull
     @OneToOne
     private Subject subject;
@@ -34,6 +33,7 @@ public class HomeTask {
     @OneToOne
     private Group group;
 
-    @JsonFormat(pattern="dd-MM-yyyy")
+    @JsonFormat(pattern = "dd-MM-yyyy")
+    @Column(name = "deadline")
     private LocalDate deadline;
 }

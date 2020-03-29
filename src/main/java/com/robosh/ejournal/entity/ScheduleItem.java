@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -18,7 +19,7 @@ import java.time.DayOfWeek;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity
+@Entity(name = "schedule_item")
 public class ScheduleItem {
 
     @Id
@@ -33,11 +34,14 @@ public class ScheduleItem {
     private Teacher teacher;
 
     @NotBlank
+    @Column(name = "cabinet")
     private String cabinet;
 
     @NotNull
+    @Column(name = "day_of_week")
     private DayOfWeek dayOfWeek;
 
     @NotNull
+    @Column(name = "subject_number")
     private Byte subjectNumber;
 }

@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -18,7 +19,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity
+@Entity(name = "mark")
 public class Mark {
 
     @Id
@@ -26,6 +27,7 @@ public class Mark {
     private Long id;
 
     @NotBlank
+    @Column(name = "score")
     private String score;
 
     @NotNull
@@ -41,6 +43,7 @@ public class Mark {
     private Subject subject;
 
     @NotNull
-    @JsonFormat(pattern="dd-MM-yyyy")
+    @JsonFormat(pattern = "dd-MM-yyyy")
+    @Column(name = "date")
     private LocalDate date;
 }
