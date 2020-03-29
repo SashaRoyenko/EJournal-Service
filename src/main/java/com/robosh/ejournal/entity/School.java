@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 
@@ -43,5 +44,6 @@ public class School {
     private String locality;
 
     @OneToOne
+    @JoinColumn(name = "director_id")
     private Director director;
 }

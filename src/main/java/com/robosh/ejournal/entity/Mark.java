@@ -10,6 +10,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -32,14 +33,17 @@ public class Mark {
 
     @NotNull
     @OneToOne
+    @JoinColumn(name = "student_id")
     private Student student;
 
     @NotNull
     @OneToOne
+    @JoinColumn(name = "teacher_id")
     private Teacher teacher;
 
     @NotNull
     @OneToOne
+    @JoinColumn(name = "subject_id")
     private Subject subject;
 
     @NotNull

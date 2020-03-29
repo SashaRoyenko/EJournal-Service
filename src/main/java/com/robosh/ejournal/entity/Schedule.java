@@ -28,6 +28,7 @@ public class Schedule {
 
     @NotNull
     @OneToOne
+    @JoinColumn(name = "group_id")
     private Group group;
 
     @OneToMany

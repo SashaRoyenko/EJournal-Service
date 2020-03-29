@@ -9,6 +9,7 @@ import lombok.NonNull;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 @Data
@@ -19,6 +20,7 @@ import javax.persistence.OneToOne;
 public class Teacher extends User {
 
     @OneToOne
+    @JoinColumn(name = "group_id")
     private Group group;
 
     @Column(name = "description")

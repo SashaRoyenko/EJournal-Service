@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
@@ -27,8 +29,10 @@ public class Student extends User {
     private LocalDate dateOfBirth;
 
     @OneToOne
+    @JoinColumn(name = "group_id")
     private Group group;
 
+    @ManyToMany
     private List<Parent> parents;
 
     @Builder

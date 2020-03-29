@@ -41,8 +41,10 @@ public class Group {
     private List<Student> studentList;
 
     @OneToOne
+    @JoinColumn(name = "teacher_id")
     private Teacher classTeacher;
 
     @OneToOne
+    @JoinColumn(name = "schedule_id")
     private Schedule schedule;
 }
