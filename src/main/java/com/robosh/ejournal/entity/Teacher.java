@@ -7,19 +7,23 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
+@Entity(name = "teacher")
 public class Teacher extends User {
 
     @OneToOne
+    @JoinColumn(name = "group_id")
     private Group group;
 
+    @Column(name = "description")
     private String description;
 
     @Builder

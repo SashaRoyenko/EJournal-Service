@@ -10,6 +10,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
@@ -18,8 +19,8 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity
-public class HomeTask {
+@Entity(name = "homework")
+public class Homework {
 
     @Id
     @GeneratedValue
@@ -27,12 +28,15 @@ public class HomeTask {
 
     @NotNull
     @OneToOne
+    @JoinColumn(name = "subject_id")
     private Subject subject;
 
     @NotNull
     @OneToOne
+    @JoinColumn(name = "group_id")
     private Group group;
 
-    @JsonFormat(pattern="dd-MM-yyyy")
+    @JsonFormat(pattern = "dd-MM-yyyy")
+    @Column(name = "deadline")
     private LocalDate deadline;
 }
