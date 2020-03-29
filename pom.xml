@@ -81,14 +81,9 @@
     </dependency>
     <!--    logger dependencies-->
     <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-api</artifactId>
-      <version>2.6.1</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-core</artifactId>
-      <version>2.6.1</version>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-log4j2</artifactId>
+      <version>2.2.6.RELEASE</version>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>

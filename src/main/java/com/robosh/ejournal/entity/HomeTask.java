@@ -25,7 +25,6 @@ public class HomeTask {
     @GeneratedValue
     private Long id;
 
-    @Column
     @NotNull
     @OneToOne
     private Subject subject;

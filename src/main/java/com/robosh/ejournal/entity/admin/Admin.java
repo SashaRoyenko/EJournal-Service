@@ -9,6 +9,7 @@ import org.springframework.lang.Nullable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -46,6 +47,6 @@ public class Admin {
     @ManyToOne
     private School school;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private AdminRole adminRole;
 }
