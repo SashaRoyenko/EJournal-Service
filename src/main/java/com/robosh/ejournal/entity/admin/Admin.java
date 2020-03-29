@@ -48,7 +48,7 @@ public class Admin {
 
     @Nullable
     @ManyToOne
-    @JoinColumn(name = "school_id", nullable = false)
+    @JoinColumn(name = "school_id")
     private School school;
 
     @Enumerated(EnumType.STRING)
