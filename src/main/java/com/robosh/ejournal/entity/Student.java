@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
@@ -33,6 +34,9 @@ public class Student extends User {
     private Group group;
 
     @ManyToMany
+    @JoinTable(name = "parent_student",
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "parent_id"))
     private List<Parent> parents;
 
     @Builder
