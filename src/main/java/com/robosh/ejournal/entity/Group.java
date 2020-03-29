@@ -37,7 +37,7 @@ public class Group {
     @OneToMany
     @JoinTable(name = "student_group",
             joinColumns = @JoinColumn(name = "group_id"),
-            inverseJoinColumns = @JoinColumn(name = "student_list"))
+            inverseJoinColumns = @JoinColumn(name = "student_id"))
     private List<Student> studentList;
 
     @OneToOne
