@@ -1,8 +1,8 @@
 package com.robosh.ejournal.repository;
 
 import com.robosh.ejournal.entity.Parent;
-import org.springframework.data.repository.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ParentRepository extends Repository<Parent, Long> {
+public interface ParentRepository extends JpaRepository<Parent, Long> {
 
 }

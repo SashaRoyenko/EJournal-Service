@@ -1,8 +1,8 @@
 package com.robosh.ejournal.repository;
 
 import com.robosh.ejournal.entity.Teacher;
-import org.springframework.data.repository.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface TeacherRepository extends Repository<Teacher, Long> {
+public interface TeacherRepository extends JpaRepository<Teacher, Long> {
 
 }
