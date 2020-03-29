@@ -19,8 +19,8 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity(name = "home_task")
-public class HomeTask {
+@Entity(name = "homework")
+public class Homework {
 
     @Id
     @GeneratedValue
