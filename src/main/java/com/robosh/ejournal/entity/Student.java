@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
@@ -30,7 +29,6 @@ public class Student extends User {
     @OneToOne
     private Group group;
 
-    @ManyToMany
     private List<Parent> parents;
 
     @Builder
