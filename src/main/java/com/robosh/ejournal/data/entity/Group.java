@@ -1,4 +1,4 @@
-package com.robosh.ejournal.entity;
+package com.robosh.ejournal.data.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

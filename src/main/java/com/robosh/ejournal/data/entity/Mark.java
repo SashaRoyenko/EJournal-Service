@@ -1,4 +1,4 @@
-package com.robosh.ejournal.entity;
+package com.robosh.ejournal.data.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;

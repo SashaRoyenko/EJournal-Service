@@ -1,6 +1,6 @@
-package com.robosh.ejournal.dto;
+package com.robosh.ejournal.data.dto;
 
-import com.robosh.ejournal.entity.School;
+import com.robosh.ejournal.data.entity.School;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -1,6 +1,6 @@
-package com.robosh.ejournal.repository;
+package com.robosh.ejournal.data.repository;
 
-import com.robosh.ejournal.entity.admin.Admin;
+import com.robosh.ejournal.data.entity.admin.Admin;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AdminRepository extends JpaRepository<Admin, Long> {

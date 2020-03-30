@@ -1,7 +1,6 @@
-package com.robosh.ejournal.dto;
+package com.robosh.ejournal.data.dto.admin;
 
-import com.robosh.ejournal.entity.School;
-import com.robosh.ejournal.entity.admin.AdminRole;
+import com.robosh.ejournal.data.entity.admin.AdminRole;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,7 +13,7 @@ import javax.validation.constraints.Pattern;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class AdminDto {
+public class UpdateAdminDto {
 
     private Long id;
 

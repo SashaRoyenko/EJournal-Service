@@ -1,11 +1,10 @@
-package com.robosh.ejournal.entity;
+package com.robosh.ejournal.data.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
