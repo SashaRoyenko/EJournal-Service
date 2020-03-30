@@ -5,7 +5,7 @@ import com.robosh.ejournal.entity.School;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface SchoolMapper {
 
     SchoolMapper SCHOOL_MAPPER = Mappers.getMapper(SchoolMapper.class);

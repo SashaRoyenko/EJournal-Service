@@ -5,7 +5,7 @@ import com.robosh.ejournal.entity.admin.Admin;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface AdminMapper {
 
     AdminMapper ADMIN_MAPPER = Mappers.getMapper(AdminMapper.class);

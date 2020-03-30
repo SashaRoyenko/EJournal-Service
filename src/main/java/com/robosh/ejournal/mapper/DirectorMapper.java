@@ -5,7 +5,7 @@ import com.robosh.ejournal.entity.Director;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface DirectorMapper {
 
     DirectorMapper directorMapper = Mappers.getMapper(DirectorMapper.class);
