@@ -2,6 +2,7 @@ package com.robosh.ejournal.controller;
 
 import com.robosh.ejournal.dto.AdminDTO;
 import com.robosh.ejournal.service.AdminService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,6 +17,7 @@ public class AdminController {
         this.adminService = adminService;
     }
 
+    @ApiOperation(value = "returns all admins")
     @RequestMapping("/admins")
     public List<AdminDTO> getAll() {
         return adminService.getAllAdmins();
