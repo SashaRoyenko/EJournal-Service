@@ -20,8 +20,6 @@ public class UserDTO {
 
     protected String email;
 
-    protected String password;
-
     protected String phone;
 
     protected School school;
