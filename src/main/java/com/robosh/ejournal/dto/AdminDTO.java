@@ -1,6 +1,5 @@
 package com.robosh.ejournal.dto;
 
-import com.robosh.ejournal.entity.School;
 import com.robosh.ejournal.entity.admin.AdminRole;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,7 +20,7 @@ public class AdminDTO {
 
     private String email;
 
-    private School school;
+    private SchoolWithDirectorDTO school;
 
     private AdminRole adminRole;
 }
