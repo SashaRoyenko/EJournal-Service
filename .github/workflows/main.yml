@@ -31,4 +31,4 @@ jobs:
         echo test, and deploy your project.
 
     - name: Start a project
-      run: echo Starting a project
+      run: mvn clean tomcat7:run
