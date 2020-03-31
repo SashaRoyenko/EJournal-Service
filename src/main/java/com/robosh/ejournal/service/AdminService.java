@@ -1,8 +1,8 @@
 package com.robosh.ejournal.service;
 
-import com.robosh.ejournal.dto.AdminDTO;
-import com.robosh.ejournal.mapper.AdminMapper;
-import com.robosh.ejournal.repository.AdminRepository;
+import com.robosh.ejournal.data.dto.admin.AdminInfoDTO;
+import com.robosh.ejournal.data.mapping.admin.AdminMapper;
+import com.robosh.ejournal.data.repository.AdminRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,9 +17,9 @@ public class AdminService {
 
     private final AdminRepository adminRepository;
 
-    public List<AdminDTO> getAllAdmins() {
+    public List<AdminInfoDTO> getAllAdmins() {
         return adminRepository.findAll().stream()
-                .map(adminMapper.ADMIN_MAPPER::fromAdminToAdminTDO)
+                .map(adminMapper::fromAdminToAdminInfoTDO)
                 .collect(Collectors.toList());
     }
 }
