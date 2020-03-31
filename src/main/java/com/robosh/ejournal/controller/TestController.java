@@ -13,24 +13,26 @@ import java.util.List;
 public class TestController {
     @GetMapping("/users/user/{id}")
     public User getUser(@PathVariable("id") Integer id) {
-        if (id > 10) {
-            return getUser();
+        if (id < 10) {
+            return getUser(id);
         }
         return null;
     }
 
     @GetMapping("/users")
     public List<User> getUsers() {
-        User user = getUser();
+
         List<User> users = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
+            User user = getUserById(i + 1L);
             users.add(user);
         }
         return users;
     }
 
-    private User getUser() {
+    private User getUserById(long id) {
         return User.builder()
+                .id(id)
                 .firstName("Oleksandr")
                 .lastName("Roienko")
                 .age(19)

@@ -6,8 +6,3 @@ server:
 spring:
   application:
     name: '@project.artifactId@'
-cors:
-  pathMapping: '/**'
-  allowedOrigins: 'http://localhost:3000'
-  allowedMethods: 'GET,POST,PUT,DELETE'
-
