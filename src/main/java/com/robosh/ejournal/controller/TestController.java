@@ -16,7 +16,7 @@ public class TestController {
     @GetMapping("/users/user/{id}")
     public ResponseEntity getUser(@PathVariable("id") Integer id) {
         if (id < 10) {
-            return new ResponseEntity<>(getUser(id), HttpStatus.OK);
+            return new ResponseEntity<>(getUserById(id), HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
