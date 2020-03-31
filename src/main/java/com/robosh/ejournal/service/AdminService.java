@@ -18,8 +18,6 @@ public class AdminService {
     private final AdminRepository adminRepository;
 
     public List<AdminInfoDTO> getAllAdmins() {
-        return adminRepository.findAll().stream()
-                .map(adminMapper::fromAdminToAdminInfoTDO)
-                .collect(Collectors.toList());
+        return adminMapper.fromAdminsToAdminInfoDTOs(adminRepository.findAll());
     }
 }
