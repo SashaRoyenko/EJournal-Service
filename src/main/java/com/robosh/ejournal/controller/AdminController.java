@@ -6,6 +6,7 @@ import com.robosh.ejournal.service.AdminService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,7 +26,7 @@ public class AdminController {
     @PostMapping
     public ResponseEntity<AdminInfoDto> saveAdmin(@ApiParam @Valid @RequestBody UpdateAdminDto updateAdminDto){
         AdminInfoDto adminDto = adminService.save(updateAdminDto);
-        return ResponseEntity.ok(adminDto);
+        return new ResponseEntity<>(adminDto, HttpStatus.CREATED);
     }
 
 }
