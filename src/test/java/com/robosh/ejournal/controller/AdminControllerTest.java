@@ -34,7 +34,7 @@ class AdminControllerTest {
     private List<AdminInfoDto> adminsList;
 
     @Test
-    void whenGetAll_givenAdminInfoDTOsList_thenShouldReturnAdminInfoDTOsList() throws Exception {
+    void Should_ReturnAdminsInfoDtoListJSON_When_GetAllAdminsInfoDto() throws Exception {
         givenAdmins();
         whenGetAllAdmins();
         thenShouldReturn();

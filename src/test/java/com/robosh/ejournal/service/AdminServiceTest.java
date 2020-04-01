@@ -38,7 +38,7 @@ class AdminServiceTest {
     private List<AdminInfoDto> actualAdminDTOS;
 
     @Test
-    void whenGetAllAdmins_givenAdminsList_thenShouldReturnAdminInfoDTOsList() {
+    void Should_ReturnAdminInfoDTOsList_When_GetAllAdmins() {
         givenAdmins();
         whenGetAllAdmins();
         thenShouldReturn();
