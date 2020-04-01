@@ -36,7 +36,8 @@ public class Teacher extends User {
             String telephone,
             School school,
             Group group,
-            String description) {
+            String description
+    ) {
         super(id, firstName, secondName, lastName, email, password, telephone, school);
         this.group = group;
         this.description = description;

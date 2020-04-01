@@ -21,7 +21,8 @@ public class DirectorWithSchoolDto extends DirectorDto {
             String lastName,
             String email,
             String phone,
-            SchoolInfoDto school) {
+            SchoolInfoDto school
+    ) {
         super(id, firstName, secondName, lastName, email, phone);
         this.school = school;
     }
