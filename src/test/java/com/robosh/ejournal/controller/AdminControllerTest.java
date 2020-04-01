@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.robosh.ejournal.data.DummyData.ANY_LONG;
+import static com.robosh.ejournal.data.DummyData.EMPTY_STRING;
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -38,7 +40,6 @@ class AdminControllerTest {
         givenAdmins();
         whenGetAllAdmins();
         thenShouldReturn();
-
     }
 
     private void whenGetAllAdmins() {
@@ -63,22 +64,19 @@ class AdminControllerTest {
                 Arrays.asList(
                         AdminInfoDto.builder()
                                 .adminRole(AdminRole.ADMIN)
-                                .email("")
-                                .firstName("")
-                                .id(1L)
-                                .lastName("")
+                                .email(EMPTY_STRING)
+                                .firstName(EMPTY_STRING)
+                                .id(ANY_LONG)
+                                .lastName(EMPTY_STRING)
                                 .build(),
                         AdminInfoDto.builder()
                                 .adminRole(AdminRole.SUPER_ADMIN)
-                                .email("")
-                                .firstName("")
-                                .id(2L)
-                                .lastName("")
+                                .email(EMPTY_STRING)
+                                .firstName(EMPTY_STRING)
+                                .id(ANY_LONG)
+                                .lastName(EMPTY_STRING)
                                 .build()
-
                 )
         );
     }
-
-
 }

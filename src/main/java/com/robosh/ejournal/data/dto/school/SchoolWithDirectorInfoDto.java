@@ -9,12 +9,12 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SchoolWithDirectorDto extends SchoolDto {
+public class SchoolWithDirectorInfoDto extends SchoolInfoDto {
 
     private DirectorDto director;
 
     @Builder(builderMethodName = "schoolWithDirectorBuilder")
-    private SchoolWithDirectorDto(Long id, String name, String url, String department, String region, String locality, DirectorDto director) {
+    private SchoolWithDirectorInfoDto(Long id, String name, String url, String department, String region, String locality, DirectorDto director) {
         super(id, name, url, department, region, locality);
         this.director = director;
     }

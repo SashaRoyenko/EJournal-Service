@@ -1,6 +1,5 @@
 package com.robosh.ejournal.data.dto.school;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SchoolDto {
+public class SchoolInfoDto {
 
     protected Long id;
 
