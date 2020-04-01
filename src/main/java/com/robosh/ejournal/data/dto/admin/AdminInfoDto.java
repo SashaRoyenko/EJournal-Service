@@ -1,6 +1,6 @@
 package com.robosh.ejournal.data.dto.admin;
 
-import com.robosh.ejournal.data.dto.school.SchoolInfoWithoutDirectorDto;
+import com.robosh.ejournal.data.dto.school.SchoolInfoDto;
 import com.robosh.ejournal.data.entity.admin.AdminRole;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,7 +26,7 @@ public class AdminInfoDto {
     @Pattern(regexp = "[A-Za-z0-9+_.-]+@[a-z.-]+\\.[a-z]{2,8}")
     private String email;
 
-    private SchoolInfoWithoutDirectorDto school;
+    private SchoolInfoDto school;
 
     private AdminRole adminRole;
 }

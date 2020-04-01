@@ -11,7 +11,7 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class SchoolInfoWithoutDirectorDto {
+public class SchoolInfoDto {
 
     private Long id;
 
