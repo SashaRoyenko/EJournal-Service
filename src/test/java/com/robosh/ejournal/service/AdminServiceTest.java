@@ -3,6 +3,9 @@ package com.robosh.ejournal.service;
 import com.robosh.ejournal.data.dto.admin.AdminInfoDTO;
 import com.robosh.ejournal.data.entity.admin.Admin;
 import com.robosh.ejournal.data.entity.admin.AdminRole;
+import com.robosh.ejournal.data.mapping.admin.AdminDTOMapper;
+import com.robosh.ejournal.data.mapping.admin.AdminMapper;
+import com.robosh.ejournal.data.mapping.admin.AdminMapperImpl;
 import com.robosh.ejournal.data.repository.AdminRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,7 +22,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest
+@SpringBootTest(classes = {
+                AdminService.class,
+                AdminMapperImpl.class
+        }
+)
 class AdminServiceTest {
 
     @MockBean
