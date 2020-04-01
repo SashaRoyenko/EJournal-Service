@@ -1,6 +1,6 @@
 package com.robosh.ejournal.controller;
 
-import com.robosh.ejournal.data.dto.admin.AdminInfoDTO;
+import com.robosh.ejournal.data.dto.admin.AdminInfoDto;
 import com.robosh.ejournal.data.entity.admin.AdminRole;
 import com.robosh.ejournal.service.AdminService;
 import org.junit.jupiter.api.Test;
@@ -31,7 +31,7 @@ class AdminControllerTest {
     @MockBean
     private AdminService mockedAdminService;
 
-    private List<AdminInfoDTO> adminsList;
+    private List<AdminInfoDto> adminsList;
 
     @Test
     void whenGetAll_givenAdminInfoDTOsList_thenShouldReturnAdminInfoDTOsList() throws Exception {
@@ -58,17 +58,17 @@ class AdminControllerTest {
         adminsList = getAdminInfoDTOs();
     }
 
-    private List<AdminInfoDTO> getAdminInfoDTOs() {
+    private List<AdminInfoDto> getAdminInfoDTOs() {
         return new ArrayList<>(
                 Arrays.asList(
-                        AdminInfoDTO.builder()
+                        AdminInfoDto.builder()
                                 .adminRole(AdminRole.ADMIN)
                                 .email("")
                                 .firstName("")
                                 .id(1L)
                                 .lastName("")
                                 .build(),
-                        AdminInfoDTO.builder()
+                        AdminInfoDto.builder()
                                 .adminRole(AdminRole.SUPER_ADMIN)
                                 .email("")
                                 .firstName("")

@@ -1,6 +1,6 @@
 package com.robosh.ejournal.data.mapping.admin;
 
-import com.robosh.ejournal.data.dto.admin.AdminInfoDTO;
+import com.robosh.ejournal.data.dto.admin.AdminInfoDto;
 import com.robosh.ejournal.data.entity.admin.Admin;
 import org.mapstruct.Mapper;
 
@@ -9,7 +9,7 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface AdminMapper {
 
-    AdminInfoDTO fromAdminToAdminInfoDTO(Admin admin);
+    AdminInfoDto fromAdminToAdminInfoDto(Admin admin);
 
-    List<AdminInfoDTO> fromAdminsToAdminInfoDTOs(List<Admin> admins);
+    List<AdminInfoDto> fromAdminsToAdminsInfoDto(List<Admin> admins);
 }

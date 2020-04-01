@@ -1,7 +1,7 @@
 package com.robosh.ejournal.service;
 
 import com.robosh.ejournal.config.MapperConfiguration;
-import com.robosh.ejournal.data.dto.admin.AdminInfoDTO;
+import com.robosh.ejournal.data.dto.admin.AdminInfoDto;
 import com.robosh.ejournal.data.entity.admin.Admin;
 import com.robosh.ejournal.data.entity.admin.AdminRole;
 import com.robosh.ejournal.data.repository.AdminRepository;
@@ -35,7 +35,7 @@ class AdminServiceTest {
 
     private List<Admin> adminsList;
 
-    private List<AdminInfoDTO> actualAdminDTOS;
+    private List<AdminInfoDto> actualAdminDTOS;
 
     @Test
     void whenGetAllAdmins_givenAdminsList_thenShouldReturnAdminInfoDTOsList() {
@@ -79,17 +79,17 @@ class AdminServiceTest {
         );
     }
 
-    private List<AdminInfoDTO> getExpectedAdminInfoDTOs(){
+    private List<AdminInfoDto> getExpectedAdminInfoDTOs(){
         return new ArrayList<>(
                 Arrays.asList(
-                        AdminInfoDTO.builder()
+                        AdminInfoDto.builder()
                                 .adminRole(AdminRole.ADMIN)
                                 .email("")
                                 .firstName("")
                                 .id(1L)
                                 .lastName("")
                                 .build(),
-                        AdminInfoDTO.builder()
+                        AdminInfoDto.builder()
                                 .adminRole(AdminRole.SUPER_ADMIN)
                                 .email("")
                                 .firstName("")

@@ -1,6 +1,6 @@
 package com.robosh.ejournal.controller;
 
-import com.robosh.ejournal.data.dto.admin.AdminInfoDTO;
+import com.robosh.ejournal.data.dto.admin.AdminInfoDto;
 import com.robosh.ejournal.service.AdminService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +19,7 @@ public class AdminController {
 
     @ApiOperation(value = "Returns all admins")
     @GetMapping
-    public List<AdminInfoDTO> getAll() {
+    public List<AdminInfoDto> getAll() {
         return adminService.getAllAdmins();
     }
 }

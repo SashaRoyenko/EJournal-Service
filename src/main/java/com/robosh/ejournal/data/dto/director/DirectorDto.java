@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DirectorDTO {
+public class DirectorDto {
 
     protected Long id;
 
