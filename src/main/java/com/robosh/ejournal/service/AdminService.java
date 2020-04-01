@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 public class AdminService {
 
     private final AdminMapper adminMapper;
-
     private final AdminRepository adminRepository;
 
     public List<AdminInfoDTO> getAllAdmins() {

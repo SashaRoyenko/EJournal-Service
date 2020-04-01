@@ -6,7 +6,7 @@ import org.mapstruct.Mapper;
 
 import java.util.List;
 
-@Mapper(uses = {AdminDTOMapper.class}, componentModel = "spring")
+@Mapper(componentModel = "spring")
 public interface AdminMapper {
 
     AdminInfoDTO fromAdminToAdminInfoDTO(Admin admin);

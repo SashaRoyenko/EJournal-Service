@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SchoolWithDirectorDTO extends SchoolDTO {
+
     private DirectorDTO director;
 
     @Builder(builderMethodName = "schoolWithDirectorBuilder")
