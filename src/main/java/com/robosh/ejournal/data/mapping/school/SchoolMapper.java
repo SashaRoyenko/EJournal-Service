@@ -5,7 +5,7 @@ import com.robosh.ejournal.data.entity.School;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
-public interface SchoolInfoWithoutDirectorDtoMapper {
+public interface SchoolMapper {
 
     School dtoToSchool(SchoolInfoDto schoolDto);
 
