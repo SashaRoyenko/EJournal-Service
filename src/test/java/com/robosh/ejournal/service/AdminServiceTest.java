@@ -5,6 +5,7 @@ import com.robosh.ejournal.data.dto.admin.UpdateAdminDto;
 import com.robosh.ejournal.data.entity.admin.Admin;
 import com.robosh.ejournal.data.entity.admin.AdminRole;
 import com.robosh.ejournal.data.repository.AdminRepository;
+import config.MapperConfiguration;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,10 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest
+@SpringBootTest(classes = {
+        AdminService.class,
+        MapperConfiguration.class
+})
 class AdminServiceTest {
 
     @Autowired
@@ -31,7 +35,7 @@ class AdminServiceTest {
     private AdminRepository adminRepository;
 
     @Test
-    void shouldSaveAdmin() {
+    void Should_SaveAdmin_WhenDataValid() {
         when(adminRepository.save(any())).thenReturn(getAdmin());
 
         UpdateAdminDto adminToSave = getUpdateAdminDto();
@@ -43,8 +47,7 @@ class AdminServiceTest {
     }
 
     @Test
-    void shouldThrowException_whenPasswordNotEquals_whenSaveAdmin() {
-
+    void Should_ThrowValidationException_WhenPasswordNotEquals_ForSaveAdmin() {
         UpdateAdminDto adminToSave = getUpdateAdminDto();
         adminToSave.setConfirmedPassword("notsamepassword");
         ValidationException validationException = assertThrows(ValidationException.class, () -> adminService.save(adminToSave));

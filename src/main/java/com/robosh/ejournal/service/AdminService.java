@@ -3,7 +3,7 @@ package com.robosh.ejournal.service;
 import com.robosh.ejournal.data.dto.admin.AdminInfoDto;
 import com.robosh.ejournal.data.dto.admin.UpdateAdminDto;
 import com.robosh.ejournal.data.entity.admin.Admin;
-import com.robosh.ejournal.data.mapping.admin.AdminDtoInfoMapper;
+import com.robosh.ejournal.data.mapping.admin.AdminInfoMapper;
 import com.robosh.ejournal.data.mapping.admin.UpdateAdminMapper;
 import com.robosh.ejournal.data.repository.AdminRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +17,7 @@ public class AdminService {
 
     private final AdminRepository adminRepository;
     private final UpdateAdminMapper updateAdminMapper;
-    private final AdminDtoInfoMapper adminDtoInfoMapper;
+    private final AdminInfoMapper adminInfoMapper;
 
     public AdminInfoDto save(UpdateAdminDto updateAdminDto) {
         if (!updateAdminDto.getPassword().equals(updateAdminDto.getConfirmedPassword())) {
@@ -28,6 +28,6 @@ public class AdminService {
             admin.setSchool(null);
         }
         adminRepository.save(admin);
-        return adminDtoInfoMapper.adminToDto(admin);
+        return adminInfoMapper.adminToDto(admin);
     }
 }

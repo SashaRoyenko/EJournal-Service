@@ -6,7 +6,7 @@ import com.robosh.ejournal.data.mapping.school.SchoolInfoWithoutDirectorDtoMappe
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring", uses = SchoolInfoWithoutDirectorDtoMapper.class)
-public interface AdminDtoInfoMapper {
+public interface AdminInfoMapper {
 
     Admin dtoToAdmin(AdminInfoDto adminDto);
 
