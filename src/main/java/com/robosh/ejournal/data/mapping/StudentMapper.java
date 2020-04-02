@@ -15,7 +15,9 @@ public interface StudentMapper {
             @Mapping(source = "group.code", target = "group"),
             @Mapping(
                     target = "parents",
-                    expression = "java(student.getParents().stream().map(parent->parent.getId()).collect(Collectors.toList()))"
+                    expression = "java(student.getParents().stream()" +
+                            ".map(parent->parent.getId())" +
+                            ".collect(Collectors.toList()))"
             )
     })
     StudentDto fromStudentToStudentDto(Student student);
