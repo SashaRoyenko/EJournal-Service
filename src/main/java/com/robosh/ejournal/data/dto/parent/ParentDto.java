@@ -1,5 +1,4 @@
-package com.robosh.ejournal.data.dto.director;
-
+package com.robosh.ejournal.data.dto.parent;
 
 import com.robosh.ejournal.data.dto.UserDto;
 import lombok.AllArgsConstructor;
@@ -7,12 +6,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
 @NoArgsConstructor
-public class DirectorDto extends UserDto {
+@Data
+public class ParentDto extends UserDto {
 
     @Builder
-    protected DirectorDto(
+    protected ParentDto(
             Long id,
             String firstName,
             String secondName,
