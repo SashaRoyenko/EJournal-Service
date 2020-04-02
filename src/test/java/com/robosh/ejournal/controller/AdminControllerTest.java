@@ -17,8 +17,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.robosh.ejournal.data.DummyData.ANY_LONG;
-import static com.robosh.ejournal.data.DummyData.EMPTY_STRING;
+import static com.robosh.ejournal.data.DummyData.*;
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -51,10 +50,10 @@ class AdminControllerTest {
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id").value("1"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.firstName").value("TestAdminName"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.lastName").value("LastAdminName"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.firstName").value(NAME))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.lastName").value(NAME))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.adminRole").value("ADMIN"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.email").value("testemail@test.com"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.email").value(EMAIL));
     }
 
     @Test
@@ -102,26 +101,25 @@ class AdminControllerTest {
         );
     }
 
-
     private AdminInfoDto getAdminInfoDto() {
         return AdminInfoDto.builder()
-                .id(1L)
-                .firstName("TestAdminName")
-                .lastName("LastAdminName")
+                .id(ANY_LONG)
+                .firstName(NAME)
+                .lastName(NAME)
                 .adminRole(AdminRole.ADMIN)
-                .email("testemail@test.com")
+                .email(EMAIL)
                 .build();
     }
 
     private UpdateAdminDto getUpdateAdminDto() {
         return UpdateAdminDto.builder()
-                .firstName("TestAdminName")
-                .lastName("LastAdminName")
+                .firstName(NAME)
+                .lastName(NAME)
                 .adminRole(AdminRole.ADMIN)
-                .email("testemail@test.com")
-                .password("password")
-                .confirmedPassword("password")
-                .schoolId(1L)
+                .email(EMAIL)
+                .password(PASSWORD)
+                .confirmedPassword(PASSWORD)
+                .schoolId(ANY_LONG)
                 .build();
     }
 }
