@@ -1,6 +1,7 @@
-package com.robosh.ejournal.data.mapping.school;
+package com.robosh.ejournal.data.mapping;
 
 import com.robosh.ejournal.data.dto.school.SchoolInfoDto;
+import com.robosh.ejournal.data.dto.school.SchoolWithDirectorInfoDto;
 import com.robosh.ejournal.data.entity.School;
 import org.mapstruct.Mapper;
 

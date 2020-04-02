@@ -13,6 +13,13 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import static com.robosh.ejournal.data.DummyData.ANY_LONG;
+import static com.robosh.ejournal.data.DummyData.EMPTY_STRING;
+import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static util.TestUtil.asJsonString;
@@ -27,6 +34,8 @@ class AdminControllerTest {
 
     @MockBean
     private AdminService mockedAdminService;
+
+    private List<AdminInfoDto> adminsList;
 
     @Test
     void Should_executeEndpointToSaveAdminAndReturnNewAdminData_WhenDataIsValid() throws Exception {
@@ -47,6 +56,52 @@ class AdminControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.adminRole").value("ADMIN"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.email").value("testemail@test.com"));
     }
+
+    @Test
+    void Should_ReturnAdminsInfoDtoListJSON_When_GetAllAdminsInfoDto() throws Exception {
+        givenAdmins();
+        whenGetAllAdmins();
+        thenShouldReturn();
+    }
+
+    private void whenGetAllAdmins() {
+        when(mockedAdminService.getAllAdmins()).thenReturn(adminsList);
+    }
+
+    private void thenShouldReturn() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders
+                .get(ADMIN_ENDPOINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$", hasSize(adminsList.size())));
+    }
+
+    private void givenAdmins() {
+        adminsList = getAdminInfoDTOs();
+    }
+
+    private List<AdminInfoDto> getAdminInfoDTOs() {
+        return new ArrayList<>(
+                Arrays.asList(
+                        AdminInfoDto.builder()
+                                .adminRole(AdminRole.ADMIN)
+                                .email(EMPTY_STRING)
+                                .firstName(EMPTY_STRING)
+                                .id(ANY_LONG)
+                                .lastName(EMPTY_STRING)
+                                .build(),
+                        AdminInfoDto.builder()
+                                .adminRole(AdminRole.SUPER_ADMIN)
+                                .email(EMPTY_STRING)
+                                .firstName(EMPTY_STRING)
+                                .id(ANY_LONG)
+                                .lastName(EMPTY_STRING)
+                                .build()
+                )
+        );
+    }
+
 
     private AdminInfoDto getAdminInfoDto() {
         return AdminInfoDto.builder()

@@ -15,6 +15,12 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.validation.ValidationException;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import static com.robosh.ejournal.data.DummyData.ANY_LONG;
+import static com.robosh.ejournal.data.DummyData.EMPTY_STRING;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
@@ -34,6 +40,18 @@ class AdminServiceTest {
     @MockBean
     private AdminRepository mockedAdminRepository;
 
+    private List<Admin> adminsList;
+
+    private List<AdminInfoDto> actualAdminDTOS;
+
+    @Test
+    void Should_ReturnAdminInfoDTOsList_When_GetAllAdmins() {
+        givenAdmins();
+        whenGetAllAdmins();
+        thenShouldReturn();
+    }
+
+
     @Test
     void Should_SaveAdmin_WhenDataValid() {
         when(mockedAdminRepository.save(any())).thenReturn(getAdmin());
@@ -52,6 +70,61 @@ class AdminServiceTest {
         adminToSave.setConfirmedPassword("notsamepassword");
         ValidationException validationException = assertThrows(ValidationException.class, () -> adminService.save(adminToSave));
         assertEquals("Password should be same", validationException.getMessage());
+    }
+
+    private void whenGetAllAdmins() {
+        when(mockedAdminRepository.findAll()).thenReturn(adminsList);
+    }
+
+    private void thenShouldReturn() {
+        actualAdminDTOS = adminService.getAllAdmins();
+        assertEquals(getExpectedAdminInfoDTOs(), actualAdminDTOS);
+    }
+
+    private void givenAdmins() {
+        adminsList = getAdmins();
+    }
+
+    private List<Admin> getAdmins() {
+        return new ArrayList<>(
+                Arrays.asList(
+                        Admin.builder()
+                                .adminRole(AdminRole.ADMIN)
+                                .email(EMPTY_STRING)
+                                .firstName(EMPTY_STRING)
+                                .id(ANY_LONG)
+                                .lastName(EMPTY_STRING)
+                                .build(),
+                        Admin.builder()
+                                .adminRole(AdminRole.SUPER_ADMIN)
+                                .email(EMPTY_STRING)
+                                .firstName(EMPTY_STRING)
+                                .id(ANY_LONG)
+                                .lastName(EMPTY_STRING)
+                                .build()
+                )
+        );
+    }
+
+    private List<AdminInfoDto> getExpectedAdminInfoDTOs() {
+        return new ArrayList<>(
+                Arrays.asList(
+                        AdminInfoDto.builder()
+                                .adminRole(AdminRole.ADMIN)
+                                .email(EMPTY_STRING)
+                                .firstName(EMPTY_STRING)
+                                .id(ANY_LONG)
+                                .lastName(EMPTY_STRING)
+                                .build(),
+                        AdminInfoDto.builder()
+                                .adminRole(AdminRole.SUPER_ADMIN)
+                                .email(EMPTY_STRING)
+                                .firstName(EMPTY_STRING)
+                                .id(ANY_LONG)
+                                .lastName(EMPTY_STRING)
+                                .build()
+                )
+        );
     }
 
     private Admin getAdmin() {

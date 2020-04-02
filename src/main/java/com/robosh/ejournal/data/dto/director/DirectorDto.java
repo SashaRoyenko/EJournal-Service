@@ -1,14 +1,16 @@
-package com.robosh.ejournal.data.dto;
+package com.robosh.ejournal.data.dto.director;
 
-import com.robosh.ejournal.data.entity.School;
+
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
+@Builder
 @NoArgsConstructor
-public class UserDTO {
+@AllArgsConstructor
+public class DirectorDto {
 
     protected Long id;
 
@@ -20,9 +22,5 @@ public class UserDTO {
 
     protected String email;
 
-    protected String password;
-
     protected String phone;
-
-    protected School school;
 }

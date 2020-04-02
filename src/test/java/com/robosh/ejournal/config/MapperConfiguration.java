@@ -1,4 +1,4 @@
-package config;
+package com.robosh.ejournal.config;
 
 import com.robosh.ejournal.data.mapping.AdminMapper;
 import com.robosh.ejournal.data.mapping.SchoolMapper;
@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Bean;
 
 @TestConfiguration
 public class MapperConfiguration {
-
     @Bean
     public AdminMapper getAdminMapper() {
         return Mappers.getMapper(AdminMapper.class);
