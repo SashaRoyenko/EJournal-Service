@@ -6,20 +6,20 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class SchoolInfoDto {
 
-    protected Long id;
+    private Long id;
 
-    protected String name;
+    private String name;
 
-    protected String url;
+    private String url;
 
-    protected String department;
+    private String department;
 
-    protected String region;
+    private String region;
 
-    protected String locality;
+    private String locality;
 }
