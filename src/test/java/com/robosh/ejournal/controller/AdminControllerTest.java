@@ -64,7 +64,7 @@ class AdminControllerTest {
     }
 
     private void whenGetAllAdmins() {
-        when(mockedAdminService.getAllAdmins()).thenReturn(adminsList);
+        when(mockedAdminService.findAll()).thenReturn(adminsList);
     }
 
     private void thenShouldReturn() throws Exception {

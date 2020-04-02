@@ -74,7 +74,7 @@ class AdminServiceTest {
     }
 
     private void thenShouldReturn() {
-        List<AdminInfoDto> actualAdminDTOS = adminService.getAllAdmins();
+        List<AdminInfoDto> actualAdminDTOS = adminService.findAll();
         assertEquals(getExpectedAdminInfoDTOs(), actualAdminDTOS);
     }
 

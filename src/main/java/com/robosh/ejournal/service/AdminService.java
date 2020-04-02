@@ -30,7 +30,7 @@ public class AdminService {
         return adminMapper.fromAdminToAdminInfoDto(admin);
     }
 
-    public List<AdminInfoDto> getAllAdmins() {
+    public List<AdminInfoDto> findAll() {
         return adminMapper.fromAdminsToAdminsInfoDto(adminRepository.findAll());
     }
 }
