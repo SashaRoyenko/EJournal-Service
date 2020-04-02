@@ -8,11 +8,7 @@ import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -31,9 +27,16 @@ public class AdminController {
         return new ResponseEntity<>(adminDto, HttpStatus.CREATED);
     }
 
+    @ApiOperation(value = "Update admin")
+    @PutMapping("/{id}")
+    public ResponseEntity<AdminInfoDto> updateAdmin(@ApiParam @Valid @RequestBody UpdateAdminDto updateAdminDto){
+        AdminInfoDto adminDto = adminService.save(updateAdminDto);
+        return new ResponseEntity<>(adminDto, HttpStatus.OK);
+    }
+
     @ApiOperation(value = "Returns all admins")
     @GetMapping
-    public List<AdminInfoDto> getAll() {
-        return adminService.getAllAdmins();
+    public List<AdminInfoDto> getAllAdmins() {
+        return adminService.findAll();
     }
 }
