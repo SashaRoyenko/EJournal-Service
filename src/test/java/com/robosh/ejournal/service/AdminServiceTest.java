@@ -32,18 +32,18 @@ class AdminServiceTest {
     private AdminService adminService;
 
     @MockBean
-    private AdminRepository adminRepository;
+    private AdminRepository mockedAdminRepository;
 
     @Test
     void Should_SaveAdmin_WhenDataValid() {
-        when(adminRepository.save(any())).thenReturn(getAdmin());
+        when(mockedAdminRepository.save(any())).thenReturn(getAdmin());
 
         UpdateAdminDto adminToSave = getUpdateAdminDto();
         AdminInfoDto result = adminService.save(adminToSave);
         AdminInfoDto expected = getAdminInfoDto();
 
         assertEquals(expected, result);
-        verify(adminRepository).save(any());
+        verify(mockedAdminRepository).save(any());
     }
 
     @Test
@@ -52,7 +52,6 @@ class AdminServiceTest {
         adminToSave.setConfirmedPassword("notsamepassword");
         ValidationException validationException = assertThrows(ValidationException.class, () -> adminService.save(adminToSave));
         assertEquals("Password should be same", validationException.getMessage());
-
     }
 
     private Admin getAdmin() {

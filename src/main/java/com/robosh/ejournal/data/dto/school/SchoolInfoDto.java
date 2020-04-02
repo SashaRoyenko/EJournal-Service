@@ -5,8 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotBlank;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,18 +13,13 @@ public class SchoolInfoDto {
 
     private Long id;
 
-    @NotBlank
     private String name;
 
     private String url;
 
-    @NotBlank
     private String department;
 
-    @NotBlank
     private String region;
 
-    @NotBlank
     private String locality;
-
 }

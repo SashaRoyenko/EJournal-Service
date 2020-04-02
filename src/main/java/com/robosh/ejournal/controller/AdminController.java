@@ -28,5 +28,4 @@ public class AdminController {
         AdminInfoDto adminDto = adminService.save(updateAdminDto);
         return new ResponseEntity<>(adminDto, HttpStatus.CREATED);
     }
-
 }

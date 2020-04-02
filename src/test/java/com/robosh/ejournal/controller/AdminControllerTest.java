@@ -24,15 +24,16 @@ class AdminControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
+
     @MockBean
-    private AdminService adminService;
+    private AdminService mockedAdminService;
 
     @Test
-    void saveAdminApi() throws Exception {
+    void Should_executeEndpointToSaveAdminAndReturnNewAdminData_WhenDataIsValid() throws Exception {
         UpdateAdminDto updateAdminDto = getUpdateAdminDto();
         AdminInfoDto adminInfoDto = getAdminInfoDto();
 
-        when(adminService.save(updateAdminDto)).thenReturn(adminInfoDto);
+        when(mockedAdminService.save(updateAdminDto)).thenReturn(adminInfoDto);
 
         mockMvc.perform(MockMvcRequestBuilders
                 .post(ADMIN_ENDPOINT)

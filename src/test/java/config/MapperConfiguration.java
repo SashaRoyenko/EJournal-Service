@@ -10,12 +10,12 @@ import org.springframework.context.annotation.Bean;
 public class MapperConfiguration {
 
     @Bean
-    public AdminMapper getAdminInfoMapper() {
+    public AdminMapper getAdminMapper() {
         return Mappers.getMapper(AdminMapper.class);
     }
 
     @Bean
-    public SchoolMapper getSchoolInfoWithoutDirectorDtoMapper() {
+    public SchoolMapper getSchoolMapper() {
         return Mappers.getMapper(SchoolMapper.class);
     }
 }

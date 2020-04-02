@@ -27,7 +27,7 @@ import javax.validation.constraints.Pattern;
 public class Admin {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @Column(name = "id")
     private Long id;
 
