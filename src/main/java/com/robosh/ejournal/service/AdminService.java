@@ -20,7 +20,6 @@ public class AdminService {
 
     private final AdminRepository adminRepository;
     private final AdminMapper adminMapper;
-
     private final ModelMapper modelMapper;
 
     public AdminInfoDto save(SaveAdminDto saveAdminDto) {
@@ -42,17 +41,18 @@ public class AdminService {
 
         Admin currentAdmin = findById(updateAdminDto.getId());
         Admin updateAdmin = adminMapper.fromSaveAdminDtoToAdmin(updateAdminDto);
+
         modelMapper.map(currentAdmin, updateAdmin);
 
-        return adminMapper.fromAdminToAdminInfoDto(currentAdmin);
+        return adminMapper.fromAdminToAdminInfoDto(adminRepository.save(currentAdmin));
     }
 
     public List<AdminInfoDto> findAll() {
         return adminMapper.fromAdminsToAdminsInfoDto(adminRepository.findAll());
     }
 
-    public Admin findById(Long id){
+    public Admin findById(Long id) {
         return adminRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
+                .orElseThrow(() -> new ResourceNotFoundException("Admin", "id", id));
     }
 }
