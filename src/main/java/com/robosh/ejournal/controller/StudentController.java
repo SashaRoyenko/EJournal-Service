@@ -1,9 +1,9 @@
 package com.robosh.ejournal.controller;
 
 import com.robosh.ejournal.data.dto.student.StudentDto;
-import com.robosh.ejournal.data.entity.Student;
 import com.robosh.ejournal.exception.ResourceNotFoundException;
 import com.robosh.ejournal.service.StudentService;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +18,7 @@ public class StudentController {
 
     private final StudentService studentService;
 
+    @ApiOperation("Get student by Id")
     @ExceptionHandler({ResourceNotFoundException.class})
     @GetMapping("/{id}")
     public StudentDto getStudentById(@PathVariable Long id){
