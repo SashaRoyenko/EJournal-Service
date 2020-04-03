@@ -12,4 +12,6 @@ import lombok.NoArgsConstructor;
 public class StudentSaveDto extends UserDto {
 
     private Long groupId;
+
+    private Long schoolId;
 }
