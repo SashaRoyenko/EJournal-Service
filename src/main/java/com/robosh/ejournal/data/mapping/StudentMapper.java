@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 public interface StudentMapper {
 
     @Mappings({
-            @Mapping(source = "group.code", target = "group"),
             @Mapping(
                     target = "parents",
                     expression = "java(student.getParents().stream()" +

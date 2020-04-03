@@ -1,6 +1,7 @@
 package com.robosh.ejournal.data.dto.student;
 
 import com.robosh.ejournal.data.dto.UserDto;
+import com.robosh.ejournal.data.dto.group.GroupDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,5 +18,5 @@ public class StudentDto extends UserDto {
 
     private List<Long> parents;
 
-    private String group;
+    private GroupDto group;
 }
