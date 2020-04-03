@@ -1,6 +1,7 @@
 package com.robosh.ejournal.data.mapping;
 
 import com.robosh.ejournal.data.dto.student.StudentDto;
+import com.robosh.ejournal.data.dto.student.StudentSaveDto;
 import com.robosh.ejournal.data.entity.Student;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -21,4 +22,10 @@ public interface StudentMapper {
             )
     })
     StudentDto fromStudentToStudentDto(Student student);
+
+    @Mappings({
+            @Mapping(source = "groupId", target = "group.id"),
+            @Mapping(source = "schoolId", target = "school.id")
+    })
+    Student fromStudentSaveDtoToStudent(StudentSaveDto dto);
 }

@@ -24,7 +24,6 @@ import java.util.List;
 @Entity(name = "student")
 public class Student extends User {
 
-    @NotNull
     @JsonFormat(pattern = "dd-MM-yyyy")
     @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
