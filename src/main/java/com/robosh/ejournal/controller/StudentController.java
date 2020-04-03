@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RequiredArgsConstructor
 @RequestMapping("/students")
 @RestController
@@ -29,7 +31,7 @@ public class StudentController {
 
     @ApiOperation("Save new student")
     @PostMapping
-    public ResponseEntity<StudentDto> saveStudent(@RequestBody StudentSaveDto student){
+    public ResponseEntity<StudentDto> saveStudent(@RequestBody @Valid StudentSaveDto student){
         return new ResponseEntity<>(studentService.save(student), HttpStatus.CREATED);
     }
 }
