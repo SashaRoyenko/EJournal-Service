@@ -14,13 +14,14 @@ public class WebConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedOrigins("http://localhost:3000")
-                .allowedMethods("GET","POST","PUT","DELETE")
+                .allowedMethods("GET", "POST", "PUT", "DELETE")
                 .allowCredentials(false).maxAge(3600);
     }
 
     @Override
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
         registry.addResourceHandler("swagger-ui.html")
+                .addResourceLocations()
                 .addResourceLocations("classpath:/META-INF/resources/");
 
         registry.addResourceHandler("/webjars/**")
