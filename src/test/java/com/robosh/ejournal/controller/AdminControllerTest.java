@@ -1,9 +1,10 @@
 package com.robosh.ejournal.controller;
 
 import com.robosh.ejournal.data.dto.admin.AdminInfoDto;
-import com.robosh.ejournal.data.dto.admin.UpdateAdminDto;
+import com.robosh.ejournal.data.dto.admin.SaveAdminDto;
 import com.robosh.ejournal.data.entity.admin.AdminRole;
 import com.robosh.ejournal.service.AdminService;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -27,7 +28,6 @@ import static util.TestUtil.asJsonString;
 class AdminControllerTest {
 
     private static final String ADMIN_ENDPOINT = "/admins";
-    private static final String ADMIN_UPDATE_ENDPOINT = ADMIN_ENDPOINT + "/{id}";
 
     @Autowired
     private MockMvc mockMvc;
@@ -39,14 +39,14 @@ class AdminControllerTest {
 
     @Test
     void Should_executeEndpointToSaveAdminAndReturnNewAdminData_WhenDataIsValid() throws Exception {
-        UpdateAdminDto updateAdminDto = getUpdateAdminDto();
+        SaveAdminDto saveAdminDto = getSaveAdminDto();
         AdminInfoDto adminInfoDto = getAdminInfoDto();
 
-        when(mockedAdminService.save(updateAdminDto)).thenReturn(adminInfoDto);
+        when(mockedAdminService.save(saveAdminDto)).thenReturn(adminInfoDto);
 
         mockMvc.perform(MockMvcRequestBuilders
                 .post(ADMIN_ENDPOINT)
-                .content(asJsonString(getUpdateAdminDto()))
+                .content(asJsonString(getSaveAdminDto()))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated())
@@ -59,15 +59,14 @@ class AdminControllerTest {
 
     @Test
     void  Should_executeEndpointToUpdateAdminAndReturnNewAdminData_WhenDataIsValid() throws Exception{
-
-        UpdateAdminDto updateAdminDto = getUpdateAdminDto();
+        SaveAdminDto saveAdminDto = getSaveAdminDto();
         AdminInfoDto adminInfoDto = getAdminInfoDto();
 
-        when(mockedAdminService.save(updateAdminDto)).thenReturn(adminInfoDto);
+        when(mockedAdminService.update(saveAdminDto)).thenReturn(adminInfoDto);
 
         mockMvc.perform(MockMvcRequestBuilders
-                .put(ADMIN_UPDATE_ENDPOINT, adminInfoDto.getId())
-                .content(asJsonString(getUpdateAdminDto()))
+                .put(ADMIN_ENDPOINT)
+                .content(asJsonString(getSaveAdminDto()))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -133,8 +132,8 @@ class AdminControllerTest {
                 .build();
     }
 
-    private UpdateAdminDto getUpdateAdminDto() {
-        return UpdateAdminDto.builder()
+    private SaveAdminDto getSaveAdminDto() {
+        return SaveAdminDto.builder()
                 .firstName(NAME)
                 .lastName(NAME)
                 .adminRole(AdminRole.ADMIN)
