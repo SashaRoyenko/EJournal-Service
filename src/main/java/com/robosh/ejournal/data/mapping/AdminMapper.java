@@ -1,7 +1,7 @@
 package com.robosh.ejournal.data.mapping;
 
 import com.robosh.ejournal.data.dto.admin.AdminInfoDto;
-import com.robosh.ejournal.data.dto.admin.UpdateAdminDto;
+import com.robosh.ejournal.data.dto.admin.SaveAdminDto;
 import com.robosh.ejournal.data.entity.admin.Admin;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -20,7 +20,7 @@ public interface AdminMapper {
     @Mappings({
             @Mapping(source = "schoolId", target = "school.id")
     })
-    Admin fromUpdateAdminDtoToAdmin(UpdateAdminDto adminDto);
+    Admin fromSaveAdminDtoToAdmin(SaveAdminDto adminDto);
 
     List<AdminInfoDto> fromAdminsToAdminsInfoDto(List<Admin> admins);
 }
