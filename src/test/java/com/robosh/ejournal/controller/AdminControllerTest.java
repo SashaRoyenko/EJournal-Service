@@ -27,6 +27,7 @@ import static util.TestUtil.asJsonString;
 class AdminControllerTest {
 
     private static final String ADMIN_ENDPOINT = "/admins";
+    private static final String ADMIN_UPDATE_ENDPOINT = ADMIN_ENDPOINT + "/{id}";
 
     @Autowired
     private MockMvc mockMvc;
@@ -49,6 +50,27 @@ class AdminControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id").value("1"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.firstName").value(NAME))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.lastName").value(NAME))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.adminRole").value("ADMIN"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.email").value(EMAIL));
+    }
+
+    @Test
+    void  Should_executeEndpointToUpdateAdminAndReturnNewAdminData_WhenDataIsValid() throws Exception{
+
+        UpdateAdminDto updateAdminDto = getUpdateAdminDto();
+        AdminInfoDto adminInfoDto = getAdminInfoDto();
+
+        when(mockedAdminService.save(updateAdminDto)).thenReturn(adminInfoDto);
+
+        mockMvc.perform(MockMvcRequestBuilders
+                .put(ADMIN_UPDATE_ENDPOINT, adminInfoDto.getId())
+                .content(asJsonString(getUpdateAdminDto()))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id").value("1"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.firstName").value(NAME))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.lastName").value(NAME))
