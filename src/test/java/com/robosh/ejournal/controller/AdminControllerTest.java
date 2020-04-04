@@ -37,15 +37,15 @@ class AdminControllerTest {
     private List<AdminInfoDto> adminsList;
 
     @Test
-    void Should_executeEndpointToSaveAdminAndReturnNewAdminData_WhenDataIsValid() throws Exception {
-        SaveAdminDto saveAdminDto = getUpdateAdminDto();
+    void Should_executeEndpointToSaveAdminAndReturnNewAdminData_When_DataIsValid() throws Exception {
+        SaveAdminDto saveAdminDto = getSaveAdminDto();
         AdminInfoDto adminInfoDto = getAdminInfoDto();
 
         when(mockedAdminService.save(saveAdminDto)).thenReturn(adminInfoDto);
 
         mockMvc.perform(MockMvcRequestBuilders
                 .post(ADMIN_ENDPOINT)
-                .content(asJsonString(getUpdateAdminDto()))
+                .content(asJsonString(saveAdminDto))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated())
@@ -111,7 +111,7 @@ class AdminControllerTest {
                 .build();
     }
 
-    private SaveAdminDto getUpdateAdminDto() {
+    private SaveAdminDto getSaveAdminDto() {
         return SaveAdminDto.builder()
                 .firstName(NAME)
                 .lastName(NAME)
