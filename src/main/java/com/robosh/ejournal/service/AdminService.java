@@ -21,6 +21,7 @@ public class AdminService {
     public AdminInfoDto save(SaveAdminDto saveAdminDto) {
 
         Admin admin = adminMapper.fromUpdateAdminDtoToAdmin(saveAdminDto);
+
         if (saveAdminDto.getId() == null) {
             admin.setSchool(null);
         }

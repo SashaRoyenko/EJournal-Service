@@ -27,6 +27,7 @@ public class ValidatorProcessor {
 
     @SneakyThrows
     public static void validate(Object object) {
+
         Set<ConstraintViolation<Object>> validates = validator.validate(object);
 
         List<Map<String, String>> violations = new ArrayList<>();
