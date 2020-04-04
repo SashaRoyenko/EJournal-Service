@@ -2,6 +2,7 @@ package com.robosh.ejournal.util.validation;
 
 import com.robosh.ejournal.exception.ValidationException;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+@Slf4j
 public class ValidatorProcessor {
 
     private static Validator validator;
@@ -27,7 +29,7 @@ public class ValidatorProcessor {
 
     @SneakyThrows
     public static void validate(Object object) {
-
+        log.info("Start validation {}", object.getClass().getSimpleName());
         Set<ConstraintViolation<Object>> validates = validator.validate(object);
 
         List<Map<String, String>> violations = new ArrayList<>();
@@ -39,6 +41,7 @@ public class ValidatorProcessor {
         }
 
         if (!violations.isEmpty()) {
+            log.info("ViolationsError: {}", violations);
             throw new ValidationException(violations);
         }
     }
