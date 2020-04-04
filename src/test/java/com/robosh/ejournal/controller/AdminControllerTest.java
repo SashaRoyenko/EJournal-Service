@@ -1,7 +1,7 @@
 package com.robosh.ejournal.controller;
 
 import com.robosh.ejournal.data.dto.admin.AdminInfoDto;
-import com.robosh.ejournal.data.dto.admin.UpdateAdminDto;
+import com.robosh.ejournal.data.dto.admin.SaveAdminDto;
 import com.robosh.ejournal.data.entity.admin.AdminRole;
 import com.robosh.ejournal.service.AdminService;
 import org.junit.jupiter.api.Test;
@@ -37,15 +37,15 @@ class AdminControllerTest {
     private List<AdminInfoDto> adminsList;
 
     @Test
-    void Should_executeEndpointToSaveAdminAndReturnNewAdminData_WhenDataIsValid() throws Exception {
-        UpdateAdminDto updateAdminDto = getUpdateAdminDto();
+    void Should_executeEndpointToSaveAdminAndReturnNewAdminData_When_DataIsValid() throws Exception {
+        SaveAdminDto saveAdminDto = getSaveAdminDto();
         AdminInfoDto adminInfoDto = getAdminInfoDto();
 
-        when(mockedAdminService.save(updateAdminDto)).thenReturn(adminInfoDto);
+        when(mockedAdminService.save(saveAdminDto)).thenReturn(adminInfoDto);
 
         mockMvc.perform(MockMvcRequestBuilders
                 .post(ADMIN_ENDPOINT)
-                .content(asJsonString(getUpdateAdminDto()))
+                .content(asJsonString(saveAdminDto))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated())
@@ -111,8 +111,8 @@ class AdminControllerTest {
                 .build();
     }
 
-    private UpdateAdminDto getUpdateAdminDto() {
-        return UpdateAdminDto.builder()
+    private SaveAdminDto getSaveAdminDto() {
+        return SaveAdminDto.builder()
                 .firstName(NAME)
                 .lastName(NAME)
                 .adminRole(AdminRole.ADMIN)

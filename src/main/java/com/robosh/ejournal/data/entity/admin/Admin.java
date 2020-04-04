@@ -1,6 +1,7 @@
 package com.robosh.ejournal.data.entity.admin;
 
 import com.robosh.ejournal.data.entity.School;
+import com.robosh.ejournal.util.validation.annotation.FieldsValueMatch;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,6 +17,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
@@ -39,7 +41,7 @@ public class Admin {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Pattern(regexp = "[A-Za-z0-9+_.-]+@[a-z.-]+\\.[a-z]{2,8}")
+    @Email
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
