@@ -13,15 +13,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import javax.validation.ValidationException;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static com.robosh.ejournal.data.DummyData.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -50,23 +47,15 @@ class AdminServiceTest {
 
 
     @Test
-    void Should_SaveAdmin_WhenDataValid() {
+    void Should_SaveAdmin_When_DataValid() {
         when(mockedAdminRepository.save(any())).thenReturn(getAdmin());
 
-        SaveAdminDto adminToSave = getUpdateAdminDto();
+        SaveAdminDto adminToSave = getSaveAdminDto();
         AdminInfoDto result = adminService.save(adminToSave);
         AdminInfoDto expected = getAdminInfoDto();
 
         assertEquals(expected, result);
         verify(mockedAdminRepository).save(any());
-    }
-
-    @Test
-    void Should_ThrowValidationException_WhenPasswordNotEquals_ForSaveAdmin() {
-        SaveAdminDto adminToSave = getUpdateAdminDto();
-        adminToSave.setConfirmedPassword("notsamepassword");
-        ValidationException validationException = assertThrows(ValidationException.class, () -> adminService.save(adminToSave));
-        assertEquals("Password should be same", validationException.getMessage());
     }
 
     private void whenGetAllAdmins() {
@@ -143,7 +132,7 @@ class AdminServiceTest {
                 .build();
     }
 
-    private SaveAdminDto getUpdateAdminDto() {
+    private SaveAdminDto getSaveAdminDto() {
         return SaveAdminDto.builder()
                 .firstName(NAME)
                 .lastName(NAME)

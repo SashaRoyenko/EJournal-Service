@@ -26,7 +26,7 @@ public class AdminController {
 
     @ApiOperation(value = "Add an admin")
     @PostMapping
-    public ResponseEntity<AdminInfoDto> saveAdmin(@ApiParam @RequestBody SaveAdminDto saveAdminDto){
+    public ResponseEntity<AdminInfoDto> saveAdmin(@ApiParam @RequestBody @Valid SaveAdminDto saveAdminDto){
         AdminInfoDto adminDto = adminService.save(saveAdminDto);
         return new ResponseEntity<>(adminDto, HttpStatus.CREATED);
     }

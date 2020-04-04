@@ -22,7 +22,8 @@ public class ValidatorProcessor {
         validator = validatorFactory.usingContext().getValidator();
     }
 
-    private ValidatorProcessor() {}
+    private ValidatorProcessor() {
+    }
 
     @SneakyThrows
     public static void validate(Object object) {
