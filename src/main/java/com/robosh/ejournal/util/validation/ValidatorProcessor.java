@@ -1,11 +1,10 @@
 package com.robosh.ejournal.util.validation;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.robosh.ejournal.exception.ValidationException;
 import lombok.SneakyThrows;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
-import javax.validation.ValidationException;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import java.util.ArrayList;
@@ -23,8 +22,7 @@ public class ValidatorProcessor {
         validator = validatorFactory.usingContext().getValidator();
     }
 
-    private ValidatorProcessor() {
-    }
+    private ValidatorProcessor() {}
 
     @SneakyThrows
     public static void validate(Object object) {
@@ -39,9 +37,7 @@ public class ValidatorProcessor {
         }
 
         if (!violations.isEmpty()) {
-            ObjectMapper objectMapper = new ObjectMapper();
-            String jsonViolationMessages = objectMapper.writeValueAsString(violations);
-            throw new ValidationException(jsonViolationMessages);
+            throw new ValidationException(violations);
         }
     }
 }
