@@ -1,7 +1,7 @@
 package com.robosh.ejournal.controller;
 
 import com.robosh.ejournal.data.dto.admin.AdminInfoDto;
-import com.robosh.ejournal.data.dto.admin.UpdateAdminDto;
+import com.robosh.ejournal.data.dto.admin.SaveAdminDto;
 import com.robosh.ejournal.service.AdminService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -26,8 +26,8 @@ public class AdminController {
 
     @ApiOperation(value = "Add an admin")
     @PostMapping
-    public ResponseEntity<AdminInfoDto> saveAdmin(@ApiParam @Valid @RequestBody UpdateAdminDto updateAdminDto){
-        AdminInfoDto adminDto = adminService.save(updateAdminDto);
+    public ResponseEntity<AdminInfoDto> saveAdmin(@ApiParam @Valid @RequestBody SaveAdminDto saveAdminDto){
+        AdminInfoDto adminDto = adminService.save(saveAdminDto);
         return new ResponseEntity<>(adminDto, HttpStatus.CREATED);
     }
 

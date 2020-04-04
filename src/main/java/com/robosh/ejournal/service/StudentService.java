@@ -1,8 +1,7 @@
 package com.robosh.ejournal.service;
 
 import com.robosh.ejournal.data.dto.student.StudentDto;
-import com.robosh.ejournal.data.dto.student.StudentSaveDto;
-import com.robosh.ejournal.data.entity.Parent;
+import com.robosh.ejournal.data.dto.student.SaveStudentDto;
 import com.robosh.ejournal.data.entity.Student;
 import com.robosh.ejournal.data.mapping.StudentMapper;
 import com.robosh.ejournal.data.repository.StudentRepository;
@@ -26,7 +25,7 @@ public class StudentService {
                     .orElseThrow(()->new ResourceNotFoundException("User", "id", id)));
     }
 
-    public StudentDto save(StudentSaveDto dto){
+    public StudentDto save(SaveStudentDto dto){
         Student student = studentMapper.fromStudentSaveDtoToStudent(dto);
         student.setParents(Optional.ofNullable(student.getParents()).orElse(new ArrayList<>()));
         return studentMapper.fromStudentToStudentDto(

@@ -13,7 +13,7 @@ import javax.validation.constraints.Pattern;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UpdateAdminDto {
+public class SaveAdminDto {
 
     private Long id;
 

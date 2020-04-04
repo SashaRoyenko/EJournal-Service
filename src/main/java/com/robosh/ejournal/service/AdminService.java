@@ -1,7 +1,7 @@
 package com.robosh.ejournal.service;
 
 import com.robosh.ejournal.data.dto.admin.AdminInfoDto;
-import com.robosh.ejournal.data.dto.admin.UpdateAdminDto;
+import com.robosh.ejournal.data.dto.admin.SaveAdminDto;
 import com.robosh.ejournal.data.entity.admin.Admin;
 import com.robosh.ejournal.data.mapping.AdminMapper;
 import com.robosh.ejournal.data.repository.AdminRepository;
@@ -18,12 +18,12 @@ public class AdminService {
     private final AdminRepository adminRepository;
     private final AdminMapper adminMapper;
 
-    public AdminInfoDto save(UpdateAdminDto updateAdminDto) {
-        if (!updateAdminDto.getPassword().equals(updateAdminDto.getConfirmedPassword())) {
+    public AdminInfoDto save(SaveAdminDto saveAdminDto) {
+        if (!saveAdminDto.getPassword().equals(saveAdminDto.getConfirmedPassword())) {
             throw new ValidationException("Password should be same");
         }
-        Admin admin = adminMapper.fromUpdateAdminDtoToAdmin(updateAdminDto);
-        if (updateAdminDto.getId() == null) {
+        Admin admin = adminMapper.fromUpdateAdminDtoToAdmin(saveAdminDto);
+        if (saveAdminDto.getId() == null) {
             admin.setSchool(null);
         }
         adminRepository.save(admin);

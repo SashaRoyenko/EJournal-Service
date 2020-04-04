@@ -1,7 +1,7 @@
 package com.robosh.ejournal.service;
 
 import com.robosh.ejournal.data.dto.admin.AdminInfoDto;
-import com.robosh.ejournal.data.dto.admin.UpdateAdminDto;
+import com.robosh.ejournal.data.dto.admin.SaveAdminDto;
 import com.robosh.ejournal.data.entity.admin.Admin;
 import com.robosh.ejournal.data.entity.admin.AdminRole;
 import com.robosh.ejournal.data.repository.AdminRepository;
@@ -53,7 +53,7 @@ class AdminServiceTest {
     void Should_SaveAdmin_WhenDataValid() {
         when(mockedAdminRepository.save(any())).thenReturn(getAdmin());
 
-        UpdateAdminDto adminToSave = getUpdateAdminDto();
+        SaveAdminDto adminToSave = getUpdateAdminDto();
         AdminInfoDto result = adminService.save(adminToSave);
         AdminInfoDto expected = getAdminInfoDto();
 
@@ -63,7 +63,7 @@ class AdminServiceTest {
 
     @Test
     void Should_ThrowValidationException_WhenPasswordNotEquals_ForSaveAdmin() {
-        UpdateAdminDto adminToSave = getUpdateAdminDto();
+        SaveAdminDto adminToSave = getUpdateAdminDto();
         adminToSave.setConfirmedPassword("notsamepassword");
         ValidationException validationException = assertThrows(ValidationException.class, () -> adminService.save(adminToSave));
         assertEquals("Password should be same", validationException.getMessage());
@@ -143,8 +143,8 @@ class AdminServiceTest {
                 .build();
     }
 
-    private UpdateAdminDto getUpdateAdminDto() {
-        return UpdateAdminDto.builder()
+    private SaveAdminDto getUpdateAdminDto() {
+        return SaveAdminDto.builder()
                 .firstName(NAME)
                 .lastName(NAME)
                 .adminRole(AdminRole.ADMIN)

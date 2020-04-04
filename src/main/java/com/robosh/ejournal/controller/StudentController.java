@@ -1,7 +1,7 @@
 package com.robosh.ejournal.controller;
 
+import com.robosh.ejournal.data.dto.student.SaveStudentDto;
 import com.robosh.ejournal.data.dto.student.StudentDto;
-import com.robosh.ejournal.data.dto.student.StudentSaveDto;
 import com.robosh.ejournal.service.StudentService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -31,7 +31,7 @@ public class StudentController {
 
     @ApiOperation("Save new student")
     @PostMapping
-    public ResponseEntity<StudentDto> saveStudent(@RequestBody @Valid StudentSaveDto student){
+    public ResponseEntity<StudentDto> saveStudent(@RequestBody @Valid SaveStudentDto student){
         return new ResponseEntity<>(studentService.save(student), HttpStatus.CREATED);
     }
 }

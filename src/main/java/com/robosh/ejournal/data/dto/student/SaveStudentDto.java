@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class StudentSaveDto extends UserDto {
+public class SaveStudentDto extends UserDto {
 
     private Long groupId;
 
