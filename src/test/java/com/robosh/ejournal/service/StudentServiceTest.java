@@ -3,22 +3,22 @@ package com.robosh.ejournal.service;
 import com.robosh.ejournal.data.dto.student.SaveStudentDto;
 import com.robosh.ejournal.data.dto.student.StudentDto;
 import com.robosh.ejournal.data.entity.Student;
-import com.robosh.ejournal.data.mapping.StudentMapper;
 import com.robosh.ejournal.data.repository.StudentRepository;
+import com.robosh.ejournal.exception.ResourceNotFoundException;
 import config.MapperConfiguration;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mapstruct.factory.Mappers;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import static com.robosh.ejournal.data.DummyData.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
@@ -34,16 +34,35 @@ class StudentServiceTest {
     @MockBean
     private StudentRepository mockedStudentRepository;
 
-    private StudentDto expectedStudentDto;
-
     @Test
     void should_ReturnStudentDto_whenGivenSaveStudentDto() {
         when(mockedStudentRepository.save(getStudent())).thenReturn(getStudent());
-        expectedStudentDto = getStudentDto();
-        System.out.println(getStudent());
-        System.out.println(Mappers.getMapper(StudentMapper.class).fromStudentSaveDtoToStudent(getSaveStudentDto()));
-        assertEquals(expectedStudentDto, studentService.save(getSaveStudentDto()));
+
+        StudentDto expectedStudentDto = getStudentDto();
+        StudentDto actualStudentDto = studentService.save(getSaveStudentDto());
+
+        assertEquals(expectedStudentDto, actualStudentDto);
     }
+
+    @Test
+    void should_ReturnStudentDtoWithGivenId_whenStudentRepositoryReturnStudent(){
+        Long expectedId = ANY_LONG;
+
+        when(mockedStudentRepository.findById(expectedId)).thenReturn(Optional.of(getStudent()));
+
+        Long actualId = studentService.findById(expectedId).getId();
+
+        assertEquals(expectedId, actualId);
+    }
+
+    @Test
+    void should_ThrowResourceNotFound_when_StudentRepositoryReturnNull(){
+        when(mockedStudentRepository.findById(ANY_LONG)).thenReturn(Optional.ofNullable(null));
+
+        assertThrows(ResourceNotFoundException.class, ()->studentService.findById(ANY_LONG));
+    }
+
+
 
     private Student getStudent() {
         return Student.builder()
