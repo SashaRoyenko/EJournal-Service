@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -35,8 +36,8 @@ public class User {
     @Column(name = "last_name")
     protected String lastName;
 
-    @Pattern(regexp = "[A-Za-z0-9+_.-]+@[a-z.-]+\\.[a-z]{2,8}")
-    @Column(name = "email")
+    @Email
+    @Column(name = "email", unique = true)
     protected String email;
 
     //todo pattern

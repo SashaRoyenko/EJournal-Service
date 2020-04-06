@@ -24,7 +24,6 @@ import java.util.List;
 @Entity(name = "student")
 public class Student extends User {
 
-    @NotNull
     @JsonFormat(pattern = "dd-MM-yyyy")
     @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
@@ -47,13 +46,13 @@ public class Student extends User {
             String lastName,
             String email,
             String password,
-            String telephone,
+            String phone,
             School school,
             LocalDate dateOfBirth,
             Group group,
             List<Parent> parents
     ) {
-        super(id, firstName, secondName, lastName, email, password, telephone, school);
+        super(id, firstName, secondName, lastName, email, password, phone, school);
         this.dateOfBirth = dateOfBirth;
         this.group = group;
         this.parents = parents;
