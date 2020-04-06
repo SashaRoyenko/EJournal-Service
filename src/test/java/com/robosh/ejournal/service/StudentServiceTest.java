@@ -35,7 +35,7 @@ class StudentServiceTest {
     private StudentRepository mockedStudentRepository;
 
     @Test
-    void should_ReturnStudentDto_whenGivenSaveStudentDto() {
+    void should_ReturnStudentDto_When_GivenSaveStudentDto() {
         when(mockedStudentRepository.save(getStudent())).thenReturn(getStudent());
 
         StudentDto expectedStudentDto = getStudentDto();
@@ -45,7 +45,7 @@ class StudentServiceTest {
     }
 
     @Test
-    void should_ReturnStudentDtoWithGivenId_whenStudentRepositoryReturnStudent(){
+    void should_ReturnStudentDtoWithGivenId_When_StudentRepositoryReturnStudent(){
         Long expectedId = ANY_LONG;
 
         when(mockedStudentRepository.findById(expectedId)).thenReturn(Optional.of(getStudent()));
@@ -56,7 +56,7 @@ class StudentServiceTest {
     }
 
     @Test
-    void should_ThrowResourceNotFound_when_StudentRepositoryReturnNull(){
+    void should_ThrowResourceNotFound_When_StudentRepositoryReturnNull(){
         when(mockedStudentRepository.findById(ANY_LONG)).thenReturn(Optional.ofNullable(null));
 
         assertThrows(ResourceNotFoundException.class, ()->studentService.findById(ANY_LONG));

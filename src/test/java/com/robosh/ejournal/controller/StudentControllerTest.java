@@ -33,7 +33,7 @@ class StudentControllerTest {
     private StudentService mockedStudentService;
 
     @Test
-    void should_returnResponseStatusSavedWithSimilarData_when_saveStudentDtoIsCorrect() throws Exception {
+    void should_returnResponseStatusSavedWithSimilarData_When_SaveStudentDtoIsCorrect() throws Exception {
         SaveStudentDto saveStudentDto = getSaveStudentDto();
         StudentDto studentDto = getStudentDto();
 
@@ -48,7 +48,7 @@ class StudentControllerTest {
     }
 
     @Test
-    void should_returnStudentDto_when_StudentServiceReturnData() throws Exception {
+    void should_returnStudentDto_When_StudentServiceReturnData() throws Exception {
         StudentDto studentDto = getStudentDto();
 
         when(mockedStudentService.findById(ANY_LONG)).thenReturn(studentDto);
@@ -60,7 +60,7 @@ class StudentControllerTest {
     }
 
     @Test
-    void should_returnResponseStatusNotFound_when_StudentServiceThrowResourceNotFound() throws Exception {
+    void should_ReturnResponseStatusNotFound_When_StudentServiceThrowResourceNotFound() throws Exception {
         when(mockedStudentService.findById(ANY_LONG)).thenThrow(ResourceNotFoundException.class);
 
         mockMvc.perform(MockMvcRequestBuilders
