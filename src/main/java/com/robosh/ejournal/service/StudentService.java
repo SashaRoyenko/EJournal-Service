@@ -22,12 +22,12 @@ public class StudentService {
     public StudentDto findById(Long id){
             return studentMapper.fromStudentToStudentDto(
                     studentRepository.findById(id)
-                    .orElseThrow(()->new ResourceNotFoundException("User", "id", id)));
+                    .orElseThrow(()->new ResourceNotFoundException("Student", "id", id)));
     }
 
     public StudentDto save(SaveStudentDto dto){
+        dto.setParents(Optional.ofNullable(dto.getParents()).orElse(new ArrayList<>()));
         Student student = studentMapper.fromStudentSaveDtoToStudent(dto);
-        student.setParents(Optional.ofNullable(student.getParents()).orElse(new ArrayList<>()));
         return studentMapper.fromStudentToStudentDto(
                 studentRepository.save(student)
         );

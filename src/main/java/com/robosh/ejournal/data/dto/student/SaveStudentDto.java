@@ -1,7 +1,6 @@
 package com.robosh.ejournal.data.dto.student;
 
 import com.robosh.ejournal.data.dto.UserDto;
-import com.robosh.ejournal.data.entity.Parent;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,7 +20,7 @@ public class SaveStudentDto extends UserDto {
 
     private String password;
 
-    private List<Parent> parents;
+    private List<Long> parents;
 
     @Builder
     private SaveStudentDto(
@@ -34,7 +33,7 @@ public class SaveStudentDto extends UserDto {
             Long groupId,
             Long schoolId,
             String password,
-            List<Parent> parents
+            List<Long> parents
     ) {
         super(id, firstName, secondName, lastName, email, phone);
         this.groupId = groupId;
