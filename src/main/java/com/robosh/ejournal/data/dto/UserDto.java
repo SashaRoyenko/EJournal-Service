@@ -22,9 +22,7 @@ public class UserDto {
 
     protected String lastName;
 
-    @Pattern(regexp = "[A-Za-z0-9+_.-]+@[a-z.-]+\\.[a-z]{2,8}")
     protected String email;
 
-    @Pattern(regexp = "^\\+?3?8?(0\\d{9})$")
     protected String phone;
 }

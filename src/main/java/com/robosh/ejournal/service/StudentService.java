@@ -6,6 +6,7 @@ import com.robosh.ejournal.data.entity.Student;
 import com.robosh.ejournal.data.mapping.StudentMapper;
 import com.robosh.ejournal.data.repository.StudentRepository;
 import com.robosh.ejournal.exception.ResourceNotFoundException;
+import com.robosh.ejournal.util.validation.ValidatorProcessor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -29,11 +30,10 @@ public class StudentService {
 
     public StudentDto save(SaveStudentDto dto) {
         dto.setParents(Optional.ofNullable(dto.getParents()).orElse(new ArrayList<>()));
-        StudentDto studentDto = studentMapper.fromStudentToStudentDto(
-                studentRepository.save(
-                        studentMapper.fromStudentSaveDtoToStudent(dto))
-        );
+        Student student = studentMapper.fromStudentSaveDtoToStudent(dto);
+        ValidatorProcessor.validate(student);
+        student = studentRepository.save(student);
         log.info("Student saved");
-        return studentDto;
+        return studentMapper.fromStudentToStudentDto(student);
     }
 }
