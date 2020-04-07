@@ -8,7 +8,6 @@ import com.robosh.ejournal.data.repository.AdminRepository;
 import com.robosh.ejournal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.validation.ValidationException;
@@ -27,22 +26,23 @@ public class AdminService {
             throw new ValidationException("Password should be same");
         }
         Admin admin = adminMapper.fromSaveAdminDtoToAdmin(saveAdminDto);
-        if (saveAdminDto.getId() == null) {
-            admin.setSchool(null);
-        }
+        saveSchoolForAdmin(saveAdminDto, admin);
         adminRepository.save(admin);
         return adminMapper.fromAdminToAdminInfoDto(admin);
     }
 
     public AdminInfoDto update(SaveAdminDto updateAdminDto) {
-        if (!updateAdminDto.getPassword().equals(updateAdminDto.getConfirmedPassword())) {
-            throw new ValidationException("Password should be same");
+        if(updateAdminDto.getPassword() != null) {
+            if (!updateAdminDto.getPassword().equals(updateAdminDto.getConfirmedPassword())) {
+                throw new ValidationException("Password should be same");
+            }
         }
 
         Admin currentAdmin = findById(updateAdminDto.getId());
         Admin updateAdmin = adminMapper.fromSaveAdminDtoToAdmin(updateAdminDto);
 
-        modelMapper.map(currentAdmin, updateAdmin);
+        saveSchoolForAdmin(updateAdminDto, currentAdmin);
+        modelMapper.map(updateAdmin, currentAdmin);
 
         return adminMapper.fromAdminToAdminInfoDto(adminRepository.save(currentAdmin));
     }
@@ -54,5 +54,11 @@ public class AdminService {
     public Admin findById(Long id) {
         return adminRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Admin", "id", id));
+    }
+
+    private void saveSchoolForAdmin(SaveAdminDto saveAdminDto, Admin admin) {
+        if (saveAdminDto.getSchoolId() == null) {
+            admin.setSchool(null);
+        }
     }
 }

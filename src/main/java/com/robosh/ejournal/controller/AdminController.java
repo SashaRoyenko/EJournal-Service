@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,8 +35,8 @@ public class AdminController {
 
     @ApiOperation(value = "Update admin")
     @PutMapping
-    public ResponseEntity<AdminInfoDto> updateAdmin(@ApiParam @Valid @RequestBody SaveAdminDto saveAdminDto){
-        AdminInfoDto adminDto = adminService.update(saveAdminDto);
+    public ResponseEntity<AdminInfoDto> updateAdmin(@ApiParam @Valid @RequestBody SaveAdminDto updateAdminDto){
+        AdminInfoDto adminDto = adminService.update(updateAdminDto);
         return new ResponseEntity<>(adminDto, HttpStatus.OK);
     }
 
