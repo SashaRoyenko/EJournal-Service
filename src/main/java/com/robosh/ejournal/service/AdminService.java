@@ -6,15 +6,17 @@ import com.robosh.ejournal.data.entity.admin.Admin;
 import com.robosh.ejournal.data.mapping.AdminMapper;
 import com.robosh.ejournal.data.repository.AdminRepository;
 import com.robosh.ejournal.exception.ResourceNotFoundException;
+import com.robosh.ejournal.util.validation.ValidatorProcessor;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import javax.validation.ValidationException;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class AdminService {
 
     private final AdminRepository adminRepository;
@@ -22,21 +24,18 @@ public class AdminService {
     private final ModelMapper modelMapper;
 
     public AdminInfoDto save(SaveAdminDto saveAdminDto) {
-        if (!saveAdminDto.getPassword().equals(saveAdminDto.getConfirmedPassword())) {
-            throw new ValidationException("Password should be same");
-        }
+
         Admin admin = adminMapper.fromSaveAdminDtoToAdmin(saveAdminDto);
+
         saveSchoolForAdmin(saveAdminDto, admin);
+
+        ValidatorProcessor.validate(admin);
         adminRepository.save(admin);
+        log.info("Admin saved");
         return adminMapper.fromAdminToAdminInfoDto(admin);
     }
 
     public AdminInfoDto update(SaveAdminDto updateAdminDto) {
-        if(updateAdminDto.getPassword() != null) {
-            if (!updateAdminDto.getPassword().equals(updateAdminDto.getConfirmedPassword())) {
-                throw new ValidationException("Password should be same");
-            }
-        }
 
         Admin currentAdmin = findById(updateAdminDto.getId());
         Admin updateAdmin = adminMapper.fromSaveAdminDtoToAdmin(updateAdminDto);
@@ -44,7 +43,10 @@ public class AdminService {
         saveSchoolForAdmin(updateAdminDto, currentAdmin);
         modelMapper.map(updateAdmin, currentAdmin);
 
-        return adminMapper.fromAdminToAdminInfoDto(adminRepository.save(currentAdmin));
+        ValidatorProcessor.validate(currentAdmin);
+        adminRepository.save(currentAdmin);
+        log.info("Admin updated");
+        return adminMapper.fromAdminToAdminInfoDto(currentAdmin);
     }
 
     public List<AdminInfoDto> findAll() {

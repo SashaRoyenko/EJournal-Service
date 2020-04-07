@@ -17,8 +17,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import javax.validation.ValidationException;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -26,7 +24,6 @@ import java.util.Optional;
 
 import static com.robosh.ejournal.data.DummyData.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -72,7 +69,7 @@ class AdminServiceTest {
     }
 
     @Test
-    void Should_SaveAdmin_WhenDataValid() {
+    void Should_SaveAdmin_When_DataValid() {
         when(mockedAdminRepository.save(any())).thenReturn(getAdmin());
 
         SaveAdminDto adminToSave = getSaveAdminDto();
@@ -83,6 +80,7 @@ class AdminServiceTest {
         verify(mockedAdminRepository).save(any());
     }
 
+<<<<<<< HEAD
     @Test
     void Should_ThrowValidationException_WhenPasswordNotEquals_ForSaveAdmin() {
         SaveAdminDto adminToSave = getSaveAdminDto();
@@ -102,6 +100,10 @@ class AdminServiceTest {
 
         assertEquals(expected, result);
         verify(mockedAdminRepository).save(any());
+=======
+    private void whenGetAllAdmins() {
+        when(mockedAdminRepository.findAll()).thenReturn(adminsList);
+>>>>>>> ed1c672626d373de2458e9f246609d95572cc894
     }
 
     @Test

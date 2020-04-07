@@ -2,6 +2,7 @@ package config;
 
 import com.robosh.ejournal.data.mapping.AdminMapper;
 import com.robosh.ejournal.data.mapping.SchoolMapper;
+import com.robosh.ejournal.data.mapping.StudentMapper;
 import org.mapstruct.factory.Mappers;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -18,4 +19,7 @@ public class MapperConfiguration {
     public SchoolMapper getSchoolMapper() {
         return Mappers.getMapper(SchoolMapper.class);
     }
+
+    @Bean
+    public StudentMapper getStudentMapper(){return Mappers.getMapper(StudentMapper.class);}
 }
