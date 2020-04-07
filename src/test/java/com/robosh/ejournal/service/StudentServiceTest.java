@@ -71,6 +71,7 @@ class StudentServiceTest {
                 .secondName(ANY_STRING)
                 .lastName(ANY_STRING)
                 .id(ANY_LONG)
+                .phone(VALID_PHONE)
                 .school(ANY_SCHOOL)
                 .password(PASSWORD)
                 .group(ANY_GROUP)
@@ -86,6 +87,7 @@ class StudentServiceTest {
                 .parents(new ArrayList<>())
                 .lastName(ANY_STRING)
                 .id(ANY_LONG)
+                .phone(VALID_PHONE)
                 .group(ANY_GROUP_DTO)
                 .build();
     }
@@ -99,6 +101,7 @@ class StudentServiceTest {
                 .schoolId(ANY_LONG)
                 .lastName(ANY_STRING)
                 .id(ANY_LONG)
+                .phone(VALID_PHONE)
                 .password(PASSWORD)
                 .build();
     }

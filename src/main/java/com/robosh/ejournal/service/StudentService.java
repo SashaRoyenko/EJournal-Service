@@ -1,7 +1,7 @@
 package com.robosh.ejournal.service;
 
-import com.robosh.ejournal.data.dto.student.StudentDto;
 import com.robosh.ejournal.data.dto.student.SaveStudentDto;
+import com.robosh.ejournal.data.dto.student.StudentDto;
 import com.robosh.ejournal.data.entity.Student;
 import com.robosh.ejournal.data.mapping.StudentMapper;
 import com.robosh.ejournal.data.repository.StudentRepository;
@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -28,6 +29,7 @@ public class StudentService {
                         .orElseThrow(() -> new ResourceNotFoundException("Student", "id", id)));
     }
 
+    @Transactional
     public StudentDto save(SaveStudentDto dto) {
         dto.setParents(Optional.ofNullable(dto.getParents()).orElse(new ArrayList<>()));
         Student student = studentMapper.fromStudentSaveDtoToStudent(dto);
