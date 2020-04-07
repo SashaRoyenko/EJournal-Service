@@ -10,7 +10,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,9 +34,17 @@ public class AdminController {
         return new ResponseEntity<>(adminDto, HttpStatus.CREATED);
     }
 
+    @ApiOperation(value = "Update admin")
+    @PutMapping
+    public ResponseEntity<AdminInfoDto> updateAdmin(@ApiParam @RequestBody SaveAdminDto updateAdminDto){
+        ValidatorProcessor.validate(updateAdminDto);
+        AdminInfoDto adminDto = adminService.update(updateAdminDto);
+        return new ResponseEntity<>(adminDto, HttpStatus.OK);
+    }
+
     @ApiOperation(value = "Returns all admins")
     @GetMapping
-    public List<AdminInfoDto> getAll() {
-        return adminService.getAllAdmins();
+    public List<AdminInfoDto> getAllAdmins() {
+        return adminService.findAll();
     }
 }

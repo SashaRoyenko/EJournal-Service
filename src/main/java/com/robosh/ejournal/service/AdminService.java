@@ -5,9 +5,11 @@ import com.robosh.ejournal.data.dto.admin.SaveAdminDto;
 import com.robosh.ejournal.data.entity.admin.Admin;
 import com.robosh.ejournal.data.mapping.AdminMapper;
 import com.robosh.ejournal.data.repository.AdminRepository;
+import com.robosh.ejournal.exception.ResourceNotFoundException;
 import com.robosh.ejournal.util.validation.ValidatorProcessor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,22 +21,46 @@ public class AdminService {
 
     private final AdminRepository adminRepository;
     private final AdminMapper adminMapper;
+    private final ModelMapper modelMapper;
 
     public AdminInfoDto save(SaveAdminDto saveAdminDto) {
-        Admin admin = adminMapper.fromUpdateAdminDtoToAdmin(saveAdminDto);
 
-        if (saveAdminDto.getId() == null) {
-            admin.setSchool(null);
-        }
+        Admin admin = adminMapper.fromSaveAdminDtoToAdmin(saveAdminDto);
+
+        saveSchoolForAdmin(saveAdminDto, admin);
 
         ValidatorProcessor.validate(admin);
-
         adminRepository.save(admin);
         log.info("Admin saved");
         return adminMapper.fromAdminToAdminInfoDto(admin);
     }
 
-    public List<AdminInfoDto> getAllAdmins() {
+    public AdminInfoDto update(SaveAdminDto updateAdminDto) {
+
+        Admin currentAdmin = findById(updateAdminDto.getId());
+        Admin updateAdmin = adminMapper.fromSaveAdminDtoToAdmin(updateAdminDto);
+
+        saveSchoolForAdmin(updateAdminDto, updateAdmin);
+        modelMapper.map(updateAdmin, currentAdmin);
+
+        ValidatorProcessor.validate(currentAdmin);
+        adminRepository.save(currentAdmin);
+        log.info("Admin updated");
+        return adminMapper.fromAdminToAdminInfoDto(currentAdmin);
+    }
+
+    public List<AdminInfoDto> findAll() {
         return adminMapper.fromAdminsToAdminsInfoDto(adminRepository.findAll());
+    }
+
+    public Admin findById(Long id) {
+        return adminRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Admin", "id", id));
+    }
+
+    private void saveSchoolForAdmin(SaveAdminDto saveAdminDto, Admin admin) {
+        if (saveAdminDto.getSchoolId() == null) {
+            admin.setSchool(null);
+        }
     }
 }

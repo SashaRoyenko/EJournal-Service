@@ -49,7 +49,27 @@ class AdminControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.id").value("1"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(ANY_LONG))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.firstName").value(NAME))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.lastName").value(NAME))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.adminRole").value("ADMIN"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.email").value(EMAIL));
+    }
+
+    @Test
+    void  Should_executeEndpointToUpdateAdminAndReturnNewAdminData_WhenDataIsValid() throws Exception{
+        SaveAdminDto saveAdminDto = getSaveAdminDto();
+        AdminInfoDto adminInfoDto = getAdminInfoDto();
+
+        when(mockedAdminService.update(saveAdminDto)).thenReturn(adminInfoDto);
+
+        mockMvc.perform(MockMvcRequestBuilders
+                .put(ADMIN_ENDPOINT)
+                .content(asJsonString(getSaveAdminDto()))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(ANY_LONG))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.firstName").value(NAME))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.lastName").value(NAME))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.adminRole").value("ADMIN"))
@@ -64,7 +84,7 @@ class AdminControllerTest {
     }
 
     private void whenGetAllAdmins() {
-        when(mockedAdminService.getAllAdmins()).thenReturn(adminsList);
+        when(mockedAdminService.findAll()).thenReturn(adminsList);
     }
 
     private void thenShouldReturn() throws Exception {

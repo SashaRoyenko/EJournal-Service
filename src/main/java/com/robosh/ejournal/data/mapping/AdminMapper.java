@@ -20,7 +20,7 @@ public interface AdminMapper {
     @Mappings({
             @Mapping(source = "schoolId", target = "school.id")
     })
-    Admin fromUpdateAdminDtoToAdmin(SaveAdminDto adminDto);
+    Admin fromSaveAdminDtoToAdmin(SaveAdminDto adminDto);
 
     List<AdminInfoDto> fromAdminsToAdminsInfoDto(List<Admin> admins);
 }
