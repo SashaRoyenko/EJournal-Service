@@ -43,10 +43,10 @@ public class AdminService {
         saveSchoolForAdmin(updateAdminDto, updateAdmin);
         modelMapper.map(updateAdmin, currentAdmin);
 
-        ValidatorProcessor.validate(updateAdmin);
-        adminRepository.save(updateAdmin);
+        ValidatorProcessor.validate(currentAdmin);
+        adminRepository.save(currentAdmin);
         log.info("Admin updated");
-        return adminMapper.fromAdminToAdminInfoDto(updateAdmin);
+        return adminMapper.fromAdminToAdminInfoDto(currentAdmin);
     }
 
     public List<AdminInfoDto> findAll() {
