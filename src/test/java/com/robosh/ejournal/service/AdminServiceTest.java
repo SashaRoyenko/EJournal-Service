@@ -7,12 +7,10 @@ import com.robosh.ejournal.data.entity.admin.AdminRole;
 import com.robosh.ejournal.data.repository.AdminRepository;
 import com.robosh.ejournal.exception.ResourceNotFoundException;
 import config.MapperConfiguration;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -24,6 +22,7 @@ import java.util.Optional;
 
 import static com.robosh.ejournal.data.DummyData.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -52,7 +51,7 @@ class AdminServiceTest {
     }
 
     @Test
-    void Should_ReturnAdminInfoDtoById_When_FindById(){
+    void Should_ReturnAdminInfoDtoById_When_FindById() {
         when(mockedAdminRepository.findById(any())).thenReturn(Optional.of(getAdmin()));
 
         Admin expected = getAdmin();
@@ -62,7 +61,7 @@ class AdminServiceTest {
     }
 
     @Test
-    void Should_ThrowResourceNotFoundException_WhenAdminNotFound_ForFindById(){
+    void Should_ThrowResourceNotFoundException_WhenAdminNotFound_ForFindById() {
         ResourceNotFoundException resourceNotFoundException =
                 assertThrows(ResourceNotFoundException.class, () -> adminService.findById(any()));
         assertEquals("Admin not found with id : 'null'", resourceNotFoundException.getMessage());
@@ -80,15 +79,6 @@ class AdminServiceTest {
         verify(mockedAdminRepository).save(any());
     }
 
-<<<<<<< HEAD
-    @Test
-    void Should_ThrowValidationException_WhenPasswordNotEquals_ForSaveAdmin() {
-        SaveAdminDto adminToSave = getSaveAdminDto();
-        adminToSave.setConfirmedPassword("notsamepassword");
-        ValidationException validationException = assertThrows(ValidationException.class, () -> adminService.save(adminToSave));
-        assertEquals("Password should be same", validationException.getMessage());
-    }
-
     @Test
     void Should_UpdateAdmin_WhenDataValid() {
         when(mockedAdminRepository.findById(any())).thenReturn(Optional.of(getAdmin()));
@@ -100,22 +90,6 @@ class AdminServiceTest {
 
         assertEquals(expected, result);
         verify(mockedAdminRepository).save(any());
-=======
-    private void whenGetAllAdmins() {
-        when(mockedAdminRepository.findAll()).thenReturn(adminsList);
->>>>>>> ed1c672626d373de2458e9f246609d95572cc894
-    }
-
-    @Test
-    void Should_ThrowValidationException_WhenPasswordNotEquals_ForUpdateAdmin() {
-        SaveAdminDto adminToSave = getSaveAdminDto();
-        adminToSave.setConfirmedPassword("notsamepassword");
-        ValidationException validationException = assertThrows(ValidationException.class, () -> adminService.update(adminToSave));
-        assertEquals("Password should be same", validationException.getMessage());
-    }
-
-    private void givenAdmins() {
-        adminsList = getAdmins();
     }
 
     private void whenGetAllAdmins() {
@@ -125,6 +99,10 @@ class AdminServiceTest {
     private void thenShouldReturn() {
         List<AdminInfoDto> actualAdminDTOS = adminService.findAll();
         assertEquals(getExpectedAdminInfoDTOs(), actualAdminDTOS);
+    }
+
+    private void givenAdmins() {
+        adminsList = getAdmins();
     }
 
     private List<Admin> getAdmins() {

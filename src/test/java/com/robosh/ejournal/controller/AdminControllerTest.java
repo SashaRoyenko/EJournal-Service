@@ -4,7 +4,6 @@ import com.robosh.ejournal.data.dto.admin.AdminInfoDto;
 import com.robosh.ejournal.data.dto.admin.SaveAdminDto;
 import com.robosh.ejournal.data.entity.admin.AdminRole;
 import com.robosh.ejournal.service.AdminService;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -38,11 +37,7 @@ class AdminControllerTest {
     private List<AdminInfoDto> adminsList;
 
     @Test
-<<<<<<< HEAD
-    void Should_executeEndpointToSaveAdminAndReturnNewAdminData_WhenDataIsValid() throws Exception {
-=======
     void Should_executeEndpointToSaveAdminAndReturnNewAdminData_When_DataIsValid() throws Exception {
->>>>>>> ed1c672626d373de2458e9f246609d95572cc894
         SaveAdminDto saveAdminDto = getSaveAdminDto();
         AdminInfoDto adminInfoDto = getAdminInfoDto();
 
@@ -50,11 +45,7 @@ class AdminControllerTest {
 
         mockMvc.perform(MockMvcRequestBuilders
                 .post(ADMIN_ENDPOINT)
-<<<<<<< HEAD
-                .content(asJsonString(getSaveAdminDto()))
-=======
                 .content(asJsonString(saveAdminDto))
->>>>>>> ed1c672626d373de2458e9f246609d95572cc894
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated())
