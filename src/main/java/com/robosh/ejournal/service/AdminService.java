@@ -40,13 +40,13 @@ public class AdminService {
         Admin currentAdmin = findById(updateAdminDto.getId());
         Admin updateAdmin = adminMapper.fromSaveAdminDtoToAdmin(updateAdminDto);
 
-        saveSchoolForAdmin(updateAdminDto, currentAdmin);
+        saveSchoolForAdmin(updateAdminDto, updateAdmin);
         modelMapper.map(updateAdmin, currentAdmin);
 
-        ValidatorProcessor.validate(currentAdmin);
-        adminRepository.save(currentAdmin);
+        ValidatorProcessor.validate(updateAdmin);
+        adminRepository.save(updateAdmin);
         log.info("Admin updated");
-        return adminMapper.fromAdminToAdminInfoDto(currentAdmin);
+        return adminMapper.fromAdminToAdminInfoDto(updateAdmin);
     }
 
     public List<AdminInfoDto> findAll() {
