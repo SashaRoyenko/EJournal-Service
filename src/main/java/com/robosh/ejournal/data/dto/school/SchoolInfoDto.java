@@ -1,5 +1,6 @@
 package com.robosh.ejournal.data.dto.school;
 
+import com.robosh.ejournal.data.entity.SettlementType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,9 +18,11 @@ public class SchoolInfoDto {
 
     private String url;
 
-    private String department;
+    private String settlementName;
 
     private String region;
 
-    private String locality;
+    private String address;
+
+    private SettlementType settlementType;
 }
