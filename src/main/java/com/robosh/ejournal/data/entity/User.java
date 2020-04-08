@@ -1,6 +1,7 @@
 package com.robosh.ejournal.data.entity;
 
 import com.robosh.ejournal.util.validation.annotation.Phone;
+import com.robosh.ejournal.util.validation.annotation.Unique;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
