@@ -55,7 +55,7 @@ class AdminServiceTest {
     void Should_ReturnAdminInfoDtoById_When_FindById() {
         when(mockedAdminRepository.findById(any())).thenReturn(Optional.of(getAdmin()));
 
-        AdminInfoDto expected= getAdminInfoDto();
+        AdminInfoDto expected = getAdminInfoDto();
         AdminInfoDto actual = adminService.findById(anyLong());
         assertEquals(expected, actual);
     }
