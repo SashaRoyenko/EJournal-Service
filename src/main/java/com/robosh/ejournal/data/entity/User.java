@@ -1,5 +1,6 @@
 package com.robosh.ejournal.data.entity;
 
+import com.robosh.ejournal.util.validation.annotation.Phone;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,6 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 
 @Data
 @NoArgsConstructor
@@ -44,7 +44,7 @@ public class User {
     @Column(name = "password")
     protected String password;
 
-    @Pattern(regexp = "^\\+?3?8?(0\\d{9})$")
+    @Phone
     @Column(name = "phone")
     protected String phone;
 

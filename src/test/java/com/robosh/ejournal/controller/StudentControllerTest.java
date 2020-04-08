@@ -2,7 +2,9 @@ package com.robosh.ejournal.controller;
 
 import com.robosh.ejournal.data.dto.student.SaveStudentDto;
 import com.robosh.ejournal.data.dto.student.StudentDto;
+import com.robosh.ejournal.data.entity.Student;
 import com.robosh.ejournal.exception.ResourceNotFoundException;
+import com.robosh.ejournal.exception.ValidationException;
 import com.robosh.ejournal.service.StudentService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,12 +70,26 @@ class StudentControllerTest {
                 .andExpect(status().isNotFound());
     }
 
+    @Test
+    void should_ReturnResponseStatusBadRequest_When_GivenStudentWithInvalidPhoneNumber() throws Exception {
+        SaveStudentDto saveStudentDtoInvalidPhone = getSaveStudentDto();
+        StudentDto studentDtoInvalidPhone = getStudentDto();
+        saveStudentDtoInvalidPhone.setPhone(ANY_STRING);
+        studentDtoInvalidPhone.setPhone(ANY_STRING);
+
+        when(mockedStudentService.save(saveStudentDtoInvalidPhone)).thenThrow(ValidationException.class);
+        mockMvc.perform(MockMvcRequestBuilders
+                .post(STUDENT_ENDPOINT))
+                .andExpect(status().isBadRequest());
+    }
+
     private SaveStudentDto getSaveStudentDto() {
         return SaveStudentDto.builder()
                 .email(EMAIL)
                 .firstName(ANY_STRING)
                 .secondName(ANY_STRING)
                 .groupId(ANY_LONG)
+                .phone(VALID_PHONE)
                 .schoolId(ANY_LONG)
                 .lastName(ANY_STRING)
                 .id(ANY_LONG)
@@ -88,8 +104,24 @@ class StudentControllerTest {
                 .secondName(ANY_STRING)
                 .parents(new ArrayList<>())
                 .lastName(ANY_STRING)
+                .phone(VALID_PHONE)
                 .id(ANY_LONG)
                 .group(ANY_GROUP_DTO)
+                .build();
+    }
+
+    private Student getStudent() {
+        return Student.builder()
+                .email(EMAIL)
+                .firstName(ANY_STRING)
+                .secondName(ANY_STRING)
+                .lastName(ANY_STRING)
+                .id(ANY_LONG)
+                .phone(VALID_PHONE)
+                .school(ANY_SCHOOL)
+                .password(PASSWORD)
+                .group(ANY_GROUP)
+                .parents(new ArrayList<>())
                 .build();
     }
 

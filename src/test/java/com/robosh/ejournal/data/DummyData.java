@@ -13,6 +13,7 @@ public interface DummyData {
     String NAME = "Name";
     String PASSWORD = "password";
     String ANY_STRING = "string";
+    String VALID_PHONE = "380961248850";
     LocalDate ANY_DATE = LocalDate.of(2000, 3, 12);
     School ANY_SCHOOL = School.builder()
             .id(ANY_LONG)
