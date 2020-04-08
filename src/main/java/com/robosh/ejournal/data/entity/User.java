@@ -1,6 +1,6 @@
 package com.robosh.ejournal.data.entity;
 
-import com.robosh.ejournal.util.validation.annotation.PhoneNumberConstraint;
+import com.robosh.ejournal.util.validation.annotation.Phone;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -44,7 +44,7 @@ public class User {
     @Column(name = "password")
     protected String password;
 
-    @PhoneNumberConstraint
+    @Phone
     @Column(name = "phone")
     protected String phone;
 

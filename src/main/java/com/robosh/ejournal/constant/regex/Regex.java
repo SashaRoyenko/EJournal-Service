@@ -1,4 +1,4 @@
-package com.robosh.ejournal.util.validation.regex;
+package com.robosh.ejournal.constant.regex;
 
 import lombok.Getter;
 

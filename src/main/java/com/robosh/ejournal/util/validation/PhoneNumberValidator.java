@@ -1,15 +1,15 @@
 package com.robosh.ejournal.util.validation;
 
-import com.robosh.ejournal.util.validation.annotation.PhoneNumberConstraint;
-import com.robosh.ejournal.util.validation.regex.Regex;
+import com.robosh.ejournal.constant.regex.Regex;
+import com.robosh.ejournal.util.validation.annotation.Phone;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class PhoneNumberValidator implements ConstraintValidator<PhoneNumberConstraint, String> {
+public class PhoneNumberValidator implements ConstraintValidator<Phone, String> {
 
     @Override
-    public void initialize(PhoneNumberConstraint constraintAnnotation) {
+    public void initialize(Phone constraintAnnotation) {
 
     }
 
