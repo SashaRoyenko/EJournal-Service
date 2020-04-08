@@ -24,6 +24,7 @@ import static com.robosh.ejournal.data.DummyData.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -54,9 +55,8 @@ class AdminServiceTest {
     void Should_ReturnAdminInfoDtoById_When_FindById() {
         when(mockedAdminRepository.findById(any())).thenReturn(Optional.of(getAdmin()));
 
-        Admin expected = getAdmin();
-        Admin actual = adminService.findById(any());
-
+        AdminInfoDto expected= getAdminInfoDto();
+        AdminInfoDto actual = adminService.findById(anyLong());
         assertEquals(expected, actual);
     }
 
@@ -154,6 +154,7 @@ class AdminServiceTest {
                 .adminRole(AdminRole.ADMIN)
                 .email(EMAIL)
                 .password(PASSWORD)
+                .school(ANY_SCHOOL)
                 .build();
     }
 
@@ -163,6 +164,7 @@ class AdminServiceTest {
                 .lastName(NAME)
                 .adminRole(AdminRole.ADMIN)
                 .email(EMAIL)
+                .school(ANY_SCHOOL_DTO)
                 .build();
     }
 
