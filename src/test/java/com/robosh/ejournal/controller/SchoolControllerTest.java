@@ -31,7 +31,7 @@ class SchoolControllerTest {
     @Test
     void should_ReturnHttpStatusCreated_whenSchoolServiceReturnDto() throws Exception {
         when(mockedSchoolService.save(getSaveSchoolDto())).thenReturn(getSchoolInfoDto());
-        
+
         mockMvc.perform(MockMvcRequestBuilders
                 .post(SCHOOL_ENDPOINT)
                 .content(asJsonString(getSaveSchoolDto()))

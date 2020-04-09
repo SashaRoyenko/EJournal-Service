@@ -28,7 +28,6 @@ public class AdminService {
         Admin admin = adminMapper.fromSaveAdminDtoToAdmin(saveAdminDto);
 
         saveSchoolForAdmin(saveAdminDto, admin);
-
         ValidatorProcessor.validate(admin);
         adminRepository.save(admin);
         log.info("Admin saved");
@@ -53,7 +52,7 @@ public class AdminService {
         return adminMapper.fromAdminsToAdminsInfoDto(adminRepository.findAll());
     }
 
-    public AdminInfoDto findById(Long id){
+    public AdminInfoDto findById(Long id) {
         return adminMapper.fromAdminToAdminInfoDto(findAdminById(id));
     }
 

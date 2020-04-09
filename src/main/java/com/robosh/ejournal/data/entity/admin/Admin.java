@@ -2,6 +2,7 @@ package com.robosh.ejournal.data.entity.admin;
 
 import com.robosh.ejournal.data.entity.School;
 import com.robosh.ejournal.util.validation.annotation.FieldsValueMatch;
+import com.robosh.ejournal.util.validation.annotation.Unique;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -42,6 +43,7 @@ public class Admin {
     private String lastName;
 
     @Email
+    @Unique(table = "admin", column = "email")
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 

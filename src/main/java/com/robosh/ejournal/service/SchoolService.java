@@ -19,7 +19,7 @@ public class SchoolService {
 
     private final SchoolMapper schoolMapper;
 
-    public SchoolInfoDto save(SaveSchoolDto saveSchoolDto){
+    public SchoolInfoDto save(SaveSchoolDto saveSchoolDto) {
         School school = schoolMapper.fromSaveSchoolDtoToSchool(saveSchoolDto);
 
         ValidatorProcessor.validate(school);

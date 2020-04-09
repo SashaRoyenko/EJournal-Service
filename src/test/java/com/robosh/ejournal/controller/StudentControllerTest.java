@@ -85,7 +85,7 @@ class StudentControllerTest {
 
     private SaveStudentDto getSaveStudentDto() {
         return SaveStudentDto.builder()
-                .email(EMAIL)
+                .email(CORRECT_EMAIL)
                 .firstName(ANY_STRING)
                 .secondName(ANY_STRING)
                 .groupId(ANY_LONG)
@@ -99,7 +99,7 @@ class StudentControllerTest {
 
     private StudentDto getStudentDto() {
         return StudentDto.builder()
-                .email(EMAIL)
+                .email(CORRECT_EMAIL)
                 .firstName(ANY_STRING)
                 .secondName(ANY_STRING)
                 .parents(new ArrayList<>())
@@ -112,7 +112,7 @@ class StudentControllerTest {
 
     private Student getStudent() {
         return Student.builder()
-                .email(EMAIL)
+                .email(CORRECT_EMAIL)
                 .firstName(ANY_STRING)
                 .secondName(ANY_STRING)
                 .lastName(ANY_STRING)

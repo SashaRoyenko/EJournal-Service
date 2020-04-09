@@ -21,7 +21,7 @@ public class SchoolController {
 
     @ApiOperation(value = "Save school")
     @PostMapping
-    public ResponseEntity<SchoolInfoDto> saveSchool(@RequestBody SaveSchoolDto dto){
+    public ResponseEntity<SchoolInfoDto> saveSchool(@RequestBody SaveSchoolDto dto) {
         SchoolInfoDto schoolInfoDto = schoolService.save(dto);
         return new ResponseEntity<>(schoolInfoDto, HttpStatus.CREATED);
     }
