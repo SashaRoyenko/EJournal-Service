@@ -5,6 +5,7 @@ import com.robosh.ejournal.data.dto.school.SchoolInfoDto;
 import com.robosh.ejournal.data.entity.School;
 import com.robosh.ejournal.data.mapping.SchoolMapper;
 import com.robosh.ejournal.data.repository.SchoolRepository;
+import com.robosh.ejournal.util.validation.ValidatorProcessor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,8 @@ public class SchoolService {
 
     public SchoolInfoDto save(SaveSchoolDto saveSchoolDto){
         School school = schoolMapper.fromSaveSchoolDtoToSchool(saveSchoolDto);
+
+        ValidatorProcessor.validate(school);
 
         school = schoolRepository.save(school);
         log.info("School saved");
