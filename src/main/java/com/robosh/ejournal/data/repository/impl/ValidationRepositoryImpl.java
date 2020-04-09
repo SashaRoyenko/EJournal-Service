@@ -17,7 +17,7 @@ public class ValidationRepositoryImpl implements ValidationRepository {
     @Override
     public boolean isUnique(String table, String column, String value) {
         int result = entityManager
-                .createNativeQuery(SELECT_COLUMN_COUNT.getQuery(column, table, value))
+                .createNativeQuery(SELECT_COLUMN_COUNT.getQuery(table, column, value))
                 .getFirstResult();
         return result == 0;
     }

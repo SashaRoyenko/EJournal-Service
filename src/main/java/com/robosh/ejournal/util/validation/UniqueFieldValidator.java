@@ -23,7 +23,7 @@ public class UniqueFieldValidator implements ConstraintValidator<Unique, String>
 
     @Override
     public boolean isValid(String field, ConstraintValidatorContext constraintValidatorContext) {
-        return !validationService.isUnique(table, column, field);
+        return validationService.isUnique(table, column, field);
     }
 
 }
