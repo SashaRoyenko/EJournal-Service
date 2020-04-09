@@ -36,7 +36,7 @@ public class AdminService {
 
     public AdminInfoDto update(SaveAdminDto updateAdminDto) {
 
-        Admin currentAdmin = findById(updateAdminDto.getId());
+        Admin currentAdmin = findAdminById(updateAdminDto.getId());
         Admin updateAdmin = adminMapper.fromSaveAdminDtoToAdmin(updateAdminDto);
 
         saveSchoolForAdmin(updateAdminDto, updateAdmin);
@@ -52,7 +52,11 @@ public class AdminService {
         return adminMapper.fromAdminsToAdminsInfoDto(adminRepository.findAll());
     }
 
-    public Admin findById(Long id) {
+    public AdminInfoDto findById(Long id) {
+        return adminMapper.fromAdminToAdminInfoDto(findAdminById(id));
+    }
+
+    private Admin findAdminById(Long id) {
         return adminRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Admin", "id", id));
     }

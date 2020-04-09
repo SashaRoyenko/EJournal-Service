@@ -1,6 +1,7 @@
 package com.robosh.ejournal.data;
 
 import com.robosh.ejournal.data.dto.group.GroupDto;
+import com.robosh.ejournal.data.dto.school.SchoolInfoDto;
 import com.robosh.ejournal.data.entity.Group;
 import com.robosh.ejournal.data.entity.School;
 
@@ -18,6 +19,7 @@ public interface DummyData {
     School ANY_SCHOOL = School.builder()
             .id(ANY_LONG)
             .build();
+    SchoolInfoDto ANY_SCHOOL_DTO = SchoolInfoDto.builder().id(ANY_LONG).build();
     Group ANY_GROUP = Group.builder().id(ANY_LONG).build();
     GroupDto ANY_GROUP_DTO = GroupDto.builder().id(ANY_LONG).build();
 }
