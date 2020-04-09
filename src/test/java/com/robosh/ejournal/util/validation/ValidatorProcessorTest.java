@@ -5,9 +5,7 @@ import com.robosh.ejournal.data.entity.admin.AdminRole;
 import com.robosh.ejournal.exception.ValidationException;
 import org.junit.jupiter.api.Test;
 
-import static com.robosh.ejournal.data.DummyData.EMAIL;
-import static com.robosh.ejournal.data.DummyData.EMPTY_STRING;
-import static com.robosh.ejournal.data.DummyData.PASSWORD;
+import static com.robosh.ejournal.data.DummyData.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 

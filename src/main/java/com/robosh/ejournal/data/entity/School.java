@@ -32,16 +32,19 @@ public class School {
     private String url;
 
     @NotBlank
-    @Column(name = "department")
-    private String department;
+    @Column(name = "settlement_name")
+    private String settlementName;
 
     @NotBlank
     @Column(name = "region")
     private String region;
 
     @NotBlank
-    @Column(name = "locality")
-    private String locality;
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "settlement_type")
+    private SettlementType settlementType;
 
     @OneToOne
     @JoinColumn(name = "director_id")
