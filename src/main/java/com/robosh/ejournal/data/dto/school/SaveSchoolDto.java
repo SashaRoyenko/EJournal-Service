@@ -10,9 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class SchoolInfoDto {
-
-    private Long id;
+public class SaveSchoolDto {
 
     private String name;
 
@@ -25,4 +23,6 @@ public class SchoolInfoDto {
     private String address;
 
     private SettlementType settlementType;
+
+    private Long directorId;
 }
