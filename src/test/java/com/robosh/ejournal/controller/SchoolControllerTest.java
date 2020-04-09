@@ -60,5 +60,4 @@ class SchoolControllerTest {
                 .url(ANY_STRING)
                 .build();
     }
-
 }
