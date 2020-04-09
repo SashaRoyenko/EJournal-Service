@@ -18,7 +18,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.robosh.ejournal.data.DummyData.*;
+import static org.hamcrest.Matchers.any;
 import static org.hamcrest.Matchers.hasSize;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static util.TestUtil.asJsonString;
@@ -27,6 +29,7 @@ import static util.TestUtil.asJsonString;
 class AdminControllerTest {
 
     private static final String ADMIN_ENDPOINT = "/admins";
+    private static final String GET_ONE_ADMIN_ENDPOINT = ADMIN_ENDPOINT + "/{id}";
 
     @Autowired
     private MockMvc mockMvc;
@@ -57,7 +60,7 @@ class AdminControllerTest {
     }
 
     @Test
-    void  Should_executeEndpointToUpdateAdminAndReturnNewAdminData_WhenDataIsValid() throws Exception{
+    void Should_executeEndpointToUpdateAdminAndReturnNewAdminData_WhenDataIsValid() throws Exception {
         SaveAdminDto saveAdminDto = getSaveAdminDto();
         AdminInfoDto adminInfoDto = getAdminInfoDto();
 
@@ -66,6 +69,24 @@ class AdminControllerTest {
         mockMvc.perform(MockMvcRequestBuilders
                 .put(ADMIN_ENDPOINT)
                 .content(asJsonString(getSaveAdminDto()))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(ANY_LONG))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.firstName").value(NAME))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.lastName").value(NAME))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.adminRole").value("ADMIN"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.email").value(EMAIL));
+    }
+
+    @Test
+    void Should_ReturnAdminInfoDtoJSON_When_GetAdminById() throws Exception {
+        AdminInfoDto adminInfoDto = getAdminInfoDto();
+
+        when(mockedAdminService.findById(anyLong())).thenReturn(adminInfoDto);
+
+        mockMvc.perform(MockMvcRequestBuilders
+                .get(GET_ONE_ADMIN_ENDPOINT, anyLong())
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
