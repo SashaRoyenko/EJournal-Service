@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import static com.robosh.ejournal.constant.Query.CHECK_EMAIL_UNIQUE;
+import static com.robosh.ejournal.constant.Query.SELECT_COLUMN_COUNT;
 
 @Repository
 public class ValidationRepositoryImpl implements ValidationRepository {
@@ -17,8 +17,8 @@ public class ValidationRepositoryImpl implements ValidationRepository {
     @Override
     public boolean isUnique(String table, String column, String value) {
         int result = entityManager
-                .createNativeQuery(CHECK_EMAIL_UNIQUE.getQuery(column, table, value))
+                .createNativeQuery(SELECT_COLUMN_COUNT.getQuery(column, table, value))
                 .getFirstResult();
-        return result <= 0;
+        return result == 0;
     }
 }

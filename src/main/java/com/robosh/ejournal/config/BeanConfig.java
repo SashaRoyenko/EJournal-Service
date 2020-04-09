@@ -19,9 +19,7 @@ public class BeanConfig {
     }
 
     @Bean
-    public BeansFactory getBeansFactory(
-            ValidationService validationService
-    ) {
+    public BeansFactory getBeansFactory(ValidationService validationService) {
         final BeansFactory beansFactory = BeansFactory.getInstance();
         beansFactory.setValidationService(validationService);
         return beansFactory;

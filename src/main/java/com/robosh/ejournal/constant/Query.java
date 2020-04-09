@@ -7,7 +7,7 @@ import lombok.Getter;
 @Getter
 public enum Query {
 
-    CHECK_EMAIL_UNIQUE("SELECT count(*) from %s where '%s' = '%s'");
+    SELECT_COLUMN_COUNT("SELECT count(*) from %s where '%s' = '%s'");
 
     private String query;
 
