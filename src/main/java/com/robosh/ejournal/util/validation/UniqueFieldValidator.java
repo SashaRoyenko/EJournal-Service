@@ -1,17 +1,15 @@
 package com.robosh.ejournal.util.validation;
 
 import com.robosh.ejournal.factory.BeansFactory;
-import com.robosh.ejournal.service.AdminService;
+import com.robosh.ejournal.service.ValidationService;
 import com.robosh.ejournal.util.validation.annotation.Unique;
-import org.springframework.stereotype.Service;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-@Service
 public class UniqueFieldValidator implements ConstraintValidator<Unique, String> {
 
-    private AdminService adminService = new BeansFactory().getAdminService();
+    private ValidationService validationService;
 
     private String table;
     private String column;
@@ -20,11 +18,12 @@ public class UniqueFieldValidator implements ConstraintValidator<Unique, String>
     public void initialize(Unique constraintAnnotation) {
         this.table = constraintAnnotation.table();
         this.column = constraintAnnotation.column();
+        this.validationService = BeansFactory.getInstance().getValidationService();
     }
 
     @Override
     public boolean isValid(String field, ConstraintValidatorContext constraintValidatorContext) {
-        return adminService.findAll().isEmpty();
+        return !validationService.isUnique(table, column, field);
     }
 
 }

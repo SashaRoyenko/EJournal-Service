@@ -14,7 +14,7 @@ import java.lang.annotation.Target;
 @Constraint(validatedBy = UniqueFieldValidator.class)
 public @interface Unique {
 
-    String message() default "Field is already exist";
+    String message() default "Current value is already exist";
 
     String table();
 

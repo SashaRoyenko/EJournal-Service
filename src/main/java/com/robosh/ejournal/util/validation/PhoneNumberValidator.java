@@ -1,6 +1,6 @@
 package com.robosh.ejournal.util.validation;
 
-import com.robosh.ejournal.constant.regex.Regex;
+import com.robosh.ejournal.constant.Regex;
 import com.robosh.ejournal.util.validation.annotation.Phone;
 
 import javax.validation.ConstraintValidator;

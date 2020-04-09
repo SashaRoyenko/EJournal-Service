@@ -1,4 +1,4 @@
-package com.robosh.ejournal.constant.regex;
+package com.robosh.ejournal.constant;
 
 import lombok.Getter;
 

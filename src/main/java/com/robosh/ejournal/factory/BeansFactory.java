@@ -1,32 +1,24 @@
 package com.robosh.ejournal.factory;
 
 
-import com.robosh.ejournal.data.repository.ValidationRepository;
-import com.robosh.ejournal.service.AdminService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
+import com.robosh.ejournal.service.ValidationService;
+import lombok.Getter;
+import lombok.Setter;
 
 
-@Component
-@Configuration
+@Setter
+@Getter
 public class BeansFactory {
 
-    @Autowired
-    private ValidationRepository validationRepository;
+    private static final BeansFactory INSTANCE = new BeansFactory();
 
-    private AdminService adminService;
+    private ValidationService validationService;
 
-    @Autowired
-    public void setAdminService(AdminService adminService) {
-        this.adminService = adminService;
+    private BeansFactory() {
     }
 
-    public ValidationRepository getValidationRepository() {
-        return validationRepository;
+    public static BeansFactory getInstance() {
+        return INSTANCE;
     }
 
-    public AdminService getAdminService() {
-        return adminService;
-    }
 }

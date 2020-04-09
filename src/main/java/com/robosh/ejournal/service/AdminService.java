@@ -28,7 +28,6 @@ public class AdminService {
         Admin admin = adminMapper.fromSaveAdminDtoToAdmin(saveAdminDto);
 
         saveSchoolForAdmin(saveAdminDto, admin);
-
         ValidatorProcessor.validate(admin);
         adminRepository.save(admin);
         log.info("Admin saved");
