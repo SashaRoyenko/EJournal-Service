@@ -10,7 +10,8 @@ import java.time.LocalDate;
 public interface DummyData {
     String EMPTY_STRING = "";
     Long ANY_LONG = 1L;
-    String EMAIL = "email@email.com";
+    String CORRECT_EMAIL = "email@email.com";
+    String INCORRECT_EMAIL = "incorrect";
     String NAME = "Name";
     String PASSWORD = "password";
     String ANY_STRING = "string";

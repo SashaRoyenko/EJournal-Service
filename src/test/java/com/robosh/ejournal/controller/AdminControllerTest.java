@@ -55,7 +55,7 @@ class AdminControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.firstName").value(NAME))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.lastName").value(NAME))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.adminRole").value("ADMIN"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.email").value(EMAIL));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.email").value(CORRECT_EMAIL));
     }
 
     @Test
@@ -75,7 +75,7 @@ class AdminControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.firstName").value(NAME))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.lastName").value(NAME))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.adminRole").value("ADMIN"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.email").value(EMAIL));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.email").value(CORRECT_EMAIL));
     }
 
     @Test
@@ -93,7 +93,7 @@ class AdminControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.firstName").value(NAME))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.lastName").value(NAME))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.adminRole").value("ADMIN"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.email").value(EMAIL));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.email").value(CORRECT_EMAIL));
     }
 
     @Test
@@ -147,7 +147,7 @@ class AdminControllerTest {
                 .firstName(NAME)
                 .lastName(NAME)
                 .adminRole(AdminRole.ADMIN)
-                .email(EMAIL)
+                .email(CORRECT_EMAIL)
                 .build();
     }
 
@@ -156,7 +156,7 @@ class AdminControllerTest {
                 .firstName(NAME)
                 .lastName(NAME)
                 .adminRole(AdminRole.ADMIN)
-                .email(EMAIL)
+                .email(CORRECT_EMAIL)
                 .password(PASSWORD)
                 .confirmedPassword(PASSWORD)
                 .schoolId(ANY_LONG)

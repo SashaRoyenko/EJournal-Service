@@ -1,10 +1,12 @@
 package com.robosh.ejournal.service;
 
+import com.robosh.ejournal.config.BeanConfig;
 import com.robosh.ejournal.data.dto.admin.AdminInfoDto;
 import com.robosh.ejournal.data.dto.admin.SaveAdminDto;
 import com.robosh.ejournal.data.entity.admin.Admin;
 import com.robosh.ejournal.data.entity.admin.AdminRole;
 import com.robosh.ejournal.data.repository.AdminRepository;
+import com.robosh.ejournal.data.repository.ValidationRepository;
 import com.robosh.ejournal.exception.ResourceNotFoundException;
 import config.MapperConfiguration;
 import org.junit.jupiter.api.Test;
@@ -32,7 +34,9 @@ import static org.mockito.Mockito.when;
 @SpringBootTest(classes = {
         AdminService.class,
         MapperConfiguration.class,
-        ModelMapper.class
+        ModelMapper.class,
+        BeanConfig.class,
+        ValidationService.class
 })
 class AdminServiceTest {
 
@@ -41,6 +45,9 @@ class AdminServiceTest {
 
     @MockBean
     private AdminRepository mockedAdminRepository;
+
+    @MockBean
+    private ValidationRepository mockedValidationRepository;
 
     private List<Admin> adminsList;
 
@@ -70,6 +77,7 @@ class AdminServiceTest {
     @Test
     void Should_SaveAdmin_When_DataValid() {
         when(mockedAdminRepository.save(any())).thenReturn(getAdmin());
+        when(mockedValidationRepository.isUnique(any(), any(), any())).thenReturn(true);
 
         SaveAdminDto adminToSave = getSaveAdminDto();
         AdminInfoDto result = adminService.save(adminToSave);
@@ -77,12 +85,15 @@ class AdminServiceTest {
 
         assertEquals(expected, result);
         verify(mockedAdminRepository).save(any());
+        verify(mockedValidationRepository).isUnique(any(), any(), any());
     }
 
     @Test
     void Should_UpdateAdmin_WhenDataValid() {
         when(mockedAdminRepository.findById(any())).thenReturn(Optional.of(getAdmin()));
         when(mockedAdminRepository.save(any())).thenReturn(getAdmin());
+        when(mockedValidationRepository.isUnique(any(), any(), any())).thenReturn(true);
+
 
         SaveAdminDto adminToSave = getSaveAdminDto();
         AdminInfoDto result = adminService.update(adminToSave);
@@ -90,6 +101,7 @@ class AdminServiceTest {
 
         assertEquals(expected, result);
         verify(mockedAdminRepository).save(any());
+        verify(mockedValidationRepository).isUnique(any(), any(), any());
     }
 
     private void whenGetAllAdmins() {
@@ -152,7 +164,7 @@ class AdminServiceTest {
                 .firstName(NAME)
                 .lastName(NAME)
                 .adminRole(AdminRole.ADMIN)
-                .email(EMAIL)
+                .email(CORRECT_EMAIL)
                 .password(PASSWORD)
                 .school(ANY_SCHOOL)
                 .build();
@@ -163,7 +175,7 @@ class AdminServiceTest {
                 .firstName(NAME)
                 .lastName(NAME)
                 .adminRole(AdminRole.ADMIN)
-                .email(EMAIL)
+                .email(CORRECT_EMAIL)
                 .school(ANY_SCHOOL_DTO)
                 .build();
     }
@@ -173,7 +185,7 @@ class AdminServiceTest {
                 .firstName(NAME)
                 .lastName(NAME)
                 .adminRole(AdminRole.ADMIN)
-                .email(EMAIL)
+                .email(CORRECT_EMAIL)
                 .password(PASSWORD)
                 .confirmedPassword(PASSWORD)
                 .schoolId(ANY_LONG)

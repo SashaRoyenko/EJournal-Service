@@ -40,7 +40,7 @@ class FieldsValueMatchValidatorTest {
                 .firstName(NAME)
                 .lastName(NAME)
                 .adminRole(AdminRole.ADMIN)
-                .email(EMAIL)
+                .email(CORRECT_EMAIL)
                 .password(PASSWORD)
                 .confirmedPassword(EMPTY_STRING)
                 .schoolId(ANY_LONG)
