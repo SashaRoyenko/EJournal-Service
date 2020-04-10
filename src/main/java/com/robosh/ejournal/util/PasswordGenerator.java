@@ -1,7 +1,9 @@
 package com.robosh.ejournal.util;
 
 import lombok.Builder;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 import java.security.SecureRandom;
 import java.util.Arrays;
@@ -9,6 +11,8 @@ import java.util.Collections;
 import java.util.List;
 
 @RequiredArgsConstructor
+@Setter
+@Getter
 @Builder
 public class PasswordGenerator {
 
@@ -18,6 +22,7 @@ public class PasswordGenerator {
     private static final String CHARS = "!@#$%&*()_+-=[]?";
 
     private static final SecureRandom random = new SecureRandom();
+    public static final int DEFAULT_PASSWORD_LENGTH = 8;
 
     private final boolean isAllowUpperLetters;
     private final boolean isAllowLowerLetters;
@@ -42,7 +47,7 @@ public class PasswordGenerator {
     }
 
     public String generateRandomPassword() {
-        return generateRandomPassword(passwordLength == 0 ? 8 : passwordLength);
+        return generateRandomPassword(passwordLength == 0 ? DEFAULT_PASSWORD_LENGTH : passwordLength);
     }
 
     private String shuffleString(String string) {
