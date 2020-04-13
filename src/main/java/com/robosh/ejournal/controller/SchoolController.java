@@ -7,6 +7,8 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,5 +26,11 @@ public class SchoolController {
     public ResponseEntity<SchoolInfoDto> saveSchool(@RequestBody SaveSchoolDto dto){
         SchoolInfoDto schoolInfoDto = schoolService.save(dto);
         return new ResponseEntity<>(schoolInfoDto, HttpStatus.CREATED);
+    }
+
+    @ApiOperation("Return school with given id")
+    @GetMapping("/{id}")
+    public SchoolInfoDto getSchoolById(@PathVariable Long id){
+        return schoolService.findById(id);
     }
 }
