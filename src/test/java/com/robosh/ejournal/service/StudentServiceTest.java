@@ -1,9 +1,11 @@
 package com.robosh.ejournal.service;
 
+import com.robosh.ejournal.config.BeanConfig;
 import com.robosh.ejournal.data.dto.student.SaveStudentDto;
 import com.robosh.ejournal.data.dto.student.StudentDto;
 import com.robosh.ejournal.data.entity.Student;
 import com.robosh.ejournal.data.repository.StudentRepository;
+import com.robosh.ejournal.data.repository.ValidationRepository;
 import com.robosh.ejournal.exception.ResourceNotFoundException;
 import config.MapperConfiguration;
 import org.junit.jupiter.api.Test;
@@ -19,12 +21,15 @@ import java.util.Optional;
 import static com.robosh.ejournal.data.DummyData.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = {
         StudentService.class,
         MapperConfiguration.class,
+        BeanConfig.class,
+        ValidationService.class
 })
 class StudentServiceTest {
 
@@ -34,9 +39,13 @@ class StudentServiceTest {
     @MockBean
     private StudentRepository mockedStudentRepository;
 
+    @MockBean
+    private ValidationRepository mockedValidationRepository;
+
     @Test
     void should_ReturnStudentDto_When_GivenSaveStudentDto() {
-        when(mockedStudentRepository.save(getStudent())).thenReturn(getStudent());
+        when(mockedValidationRepository.isUnique(any(), any(), any())).thenReturn(true);
+        when(mockedStudentRepository.save(any())).thenReturn(getStudent());
 
         StudentDto expectedStudentDto = getStudentDto();
         StudentDto actualStudentDto = studentService.save(getSaveStudentDto());
@@ -45,7 +54,7 @@ class StudentServiceTest {
     }
 
     @Test
-    void should_ReturnStudentDtoWithGivenId_When_StudentRepositoryReturnStudent(){
+    void should_ReturnStudentDtoWithGivenId_When_StudentRepositoryReturnStudent() {
         Long expectedId = ANY_LONG;
 
         when(mockedStudentRepository.findById(expectedId)).thenReturn(Optional.of(getStudent()));
@@ -56,12 +65,11 @@ class StudentServiceTest {
     }
 
     @Test
-    void should_ThrowResourceNotFound_When_StudentRepositoryReturnNull(){
+    void should_ThrowResourceNotFound_When_StudentRepositoryReturnNull() {
         when(mockedStudentRepository.findById(ANY_LONG)).thenReturn(Optional.ofNullable(null));
 
-        assertThrows(ResourceNotFoundException.class, ()->studentService.findById(ANY_LONG));
+        assertThrows(ResourceNotFoundException.class, () -> studentService.findById(ANY_LONG));
     }
-
 
 
     private Student getStudent() {
@@ -79,7 +87,7 @@ class StudentServiceTest {
                 .build();
     }
 
-    private StudentDto getStudentDto(){
+    private StudentDto getStudentDto() {
         return StudentDto.builder()
                 .email(CORRECT_EMAIL)
                 .firstName(ANY_STRING)

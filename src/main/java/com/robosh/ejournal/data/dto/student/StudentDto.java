@@ -5,12 +5,16 @@ import com.robosh.ejournal.data.dto.group.GroupDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 public class StudentDto extends UserDto {

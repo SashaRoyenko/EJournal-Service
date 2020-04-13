@@ -6,6 +6,7 @@ import com.robosh.ejournal.data.entity.Student;
 import com.robosh.ejournal.data.mapping.StudentMapper;
 import com.robosh.ejournal.data.repository.StudentRepository;
 import com.robosh.ejournal.exception.ResourceNotFoundException;
+import com.robosh.ejournal.util.PasswordGenerator;
 import com.robosh.ejournal.util.validation.ValidatorProcessor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +23,7 @@ public class StudentService {
 
     private final StudentRepository studentRepository;
     private final StudentMapper studentMapper;
+    private final PasswordGenerator passwordGenerator;
 
     public StudentDto findById(Long id) {
         return studentMapper.fromStudentToStudentDto(
@@ -33,6 +35,8 @@ public class StudentService {
     public StudentDto save(SaveStudentDto dto) {
         dto.setParents(Optional.ofNullable(dto.getParents()).orElse(new ArrayList<>()));
         Student student = studentMapper.fromStudentSaveDtoToStudent(dto);
+        student.setPassword(passwordGenerator.generateRandomPassword());
+
         ValidatorProcessor.validate(student);
         student = studentRepository.save(student);
         log.info("Student saved");

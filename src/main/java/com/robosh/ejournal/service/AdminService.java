@@ -6,6 +6,7 @@ import com.robosh.ejournal.data.entity.admin.Admin;
 import com.robosh.ejournal.data.mapping.AdminMapper;
 import com.robosh.ejournal.data.repository.AdminRepository;
 import com.robosh.ejournal.exception.ResourceNotFoundException;
+import com.robosh.ejournal.util.PasswordGenerator;
 import com.robosh.ejournal.util.validation.ValidatorProcessor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,10 +23,12 @@ public class AdminService {
     private final AdminRepository adminRepository;
     private final AdminMapper adminMapper;
     private final ModelMapper modelMapper;
+    private final PasswordGenerator passwordGenerator;
 
     public AdminInfoDto save(SaveAdminDto saveAdminDto) {
 
         Admin admin = adminMapper.fromSaveAdminDtoToAdmin(saveAdminDto);
+        admin.setPassword(passwordGenerator.generateRandomPassword());
 
         saveSchoolForAdmin(saveAdminDto, admin);
         ValidatorProcessor.validate(admin);
