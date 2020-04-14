@@ -11,6 +11,9 @@ import com.robosh.ejournal.util.validation.ValidatorProcessor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -57,6 +60,13 @@ public class AdminService {
 
     public AdminInfoDto findById(Long id) {
         return adminMapper.fromAdminToAdminInfoDto(findAdminById(id));
+    }
+
+    public List<AdminInfoDto> findPaginated(int page, int size){
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Admin> adminPage = adminRepository.findAll(pageable);
+
+        return adminMapper.fromAdminsToAdminsInfoDto(adminPage.getContent());
     }
 
     private Admin findAdminById(Long id) {

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -52,5 +53,11 @@ public class AdminController {
     @GetMapping("/{id}")
     public AdminInfoDto getAdminById(@PathVariable Long id) {
         return adminService.findById(id);
+    }
+
+    @ApiOperation(value = "Returns admins paged")
+    @GetMapping(params = {"page", "size"})
+    public List<AdminInfoDto> getAdminsPaged(@RequestParam int page, @RequestParam int size){
+        return adminService.findPaginated(page, size);
     }
 }
