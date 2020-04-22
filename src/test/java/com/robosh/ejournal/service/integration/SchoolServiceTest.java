@@ -22,7 +22,7 @@ class SchoolServiceTest {
     @Autowired
     private SchoolService schoolService;
 
-    @Sql("classpath:schoolData.sql")
+    @Sql("classpath:school_data.sql")
     @Test
     void should_returnCorrectNumberOfEntities_When_GivenPageable(){
         List<SchoolInfoDto> schools = schoolService.findPaginated(0, PAGE_SIZE);
