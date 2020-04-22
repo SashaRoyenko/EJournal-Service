@@ -9,7 +9,12 @@ import com.robosh.ejournal.exception.ResourceNotFoundException;
 import com.robosh.ejournal.util.validation.ValidatorProcessor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @Slf4j
@@ -35,5 +40,11 @@ public class SchoolService {
         School school = schoolRepository.findById(id)
                 .orElseThrow(() ->new ResourceNotFoundException("School", "id", id));
         return schoolMapper.fromSchoolToSchoolInfoDto(school);
+    }
+
+    public List<SchoolInfoDto> findPaginated(int page, int size){
+        Pageable pageable = PageRequest.of(page, size);
+        Page<School> paged = schoolRepository.findAll(pageable);
+        return schoolMapper.fromSchoolsToSchoolsInfoDo(paged.toList());
     }
 }
