@@ -83,6 +83,39 @@ class StudentControllerTest {
                 .andExpect(status().isBadRequest());
     }
 
+    @Test
+    void should_ReturnStudentDto_When_StudentServiceWorkWithoutException() throws Exception {
+        when(mockedStudentService.update(getSaveStudentDto())).thenReturn(getStudentDto());
+
+        mockMvc.perform(MockMvcRequestBuilders
+                .put(STUDENT_ENDPOINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(asJsonString(getSaveStudentDto())))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(ANY_LONG));
+    }
+    @Test
+    void should_ReturnResponseStatusBadRequest_When_StudentServiceThrowValidationException() throws Exception {
+        when(mockedStudentService.update(getSaveStudentDto())).thenThrow(ValidationException.class);
+
+        mockMvc.perform(MockMvcRequestBuilders
+                .put(STUDENT_ENDPOINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(asJsonString(getSaveStudentDto())))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void should_ReturnResponseStatusBadRequest_When_PasswordsDoesNotMatch() throws Exception {
+        SaveStudentDto dto = getSaveStudentDto();
+        dto.setConfirmedPassword(EMPTY_STRING);
+        mockMvc.perform(MockMvcRequestBuilders
+                .put(STUDENT_ENDPOINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(asJsonString(dto)))
+                .andExpect(status().isBadRequest());
+    }
+
     private SaveStudentDto getSaveStudentDto() {
         return SaveStudentDto.builder()
                 .email(CORRECT_EMAIL)
@@ -94,6 +127,7 @@ class StudentControllerTest {
                 .lastName(ANY_STRING)
                 .id(ANY_LONG)
                 .password(PASSWORD)
+                .confirmedPassword(PASSWORD)
                 .build();
     }
 

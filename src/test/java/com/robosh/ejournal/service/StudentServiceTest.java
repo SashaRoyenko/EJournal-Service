@@ -7,6 +7,7 @@ import com.robosh.ejournal.data.entity.Student;
 import com.robosh.ejournal.data.repository.StudentRepository;
 import com.robosh.ejournal.data.repository.ValidationRepository;
 import com.robosh.ejournal.exception.ResourceNotFoundException;
+import com.robosh.ejournal.exception.ValidationException;
 import config.MapperConfiguration;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -71,6 +72,31 @@ class StudentServiceTest {
         assertThrows(ResourceNotFoundException.class, () -> studentService.findById(ANY_LONG));
     }
 
+    @Test
+    void should_ReturnUpdatedEntity_When_GivenDtoWithValidData() {
+        SaveStudentDto updateDto = getUpdateStudentDto();
+        Student updateStudent = getStudent();
+        updateStudent.setFirstName(updateDto.getFirstName());
+        StudentDto updatedStudent = getStudentDto();
+        updatedStudent.setFirstName(updateDto.getFirstName());
+
+
+        when(mockedStudentRepository.findById(ANY_LONG)).thenReturn(Optional.of(getStudent()));
+        when(mockedStudentRepository.save(updateStudent)).thenReturn(updateStudent);
+
+        assertEquals(updatedStudent, studentService.update(updateDto));
+    }
+
+    @Test
+    void should_ThrowValidationException_When_GivenDtoWithInvalidData() {
+        SaveStudentDto updateDto = getUpdateStudentDto();
+        updateDto.setEmail(INCORRECT_EMAIL);
+
+        when(mockedStudentRepository.findById(ANY_LONG)).thenReturn(Optional.of(getStudent()));
+
+        assertThrows(ValidationException.class, () -> studentService.update(updateDto));
+    }
+
 
     private Student getStudent() {
         return Student.builder()
@@ -111,6 +137,13 @@ class StudentServiceTest {
                 .id(ANY_LONG)
                 .phone(VALID_PHONE)
                 .password(PASSWORD)
+                .build();
+    }
+
+    private SaveStudentDto getUpdateStudentDto(){
+        return SaveStudentDto.builder()
+                .id(ANY_LONG)
+                .firstName(NAME)
                 .build();
     }
 }
