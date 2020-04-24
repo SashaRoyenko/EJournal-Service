@@ -8,6 +8,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring", imports = {Collectors.class, Parent.class})
@@ -36,4 +37,6 @@ public interface StudentMapper {
             )
     })
     Student fromStudentSaveDtoToStudent(SaveStudentDto dto);
+
+    List<StudentDto> fromStudentsToStudentsDto(List<Student> students);
 }
