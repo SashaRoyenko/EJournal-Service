@@ -12,9 +12,13 @@ import com.robosh.ejournal.util.validation.ValidatorProcessor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -58,13 +62,19 @@ public class ParentService {
         return parentMapper.fromParentToParentDto(findParentById(id));
     }
 
+    public List<ParentDto> findAllBySchoolId(Long id, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Parent> paged = parentRepository.findAllBySchoolId(id, pageable);
+        return parentMapper.fromParentsToParentsDto(paged.getContent());
+    }
+
     private Parent findParentById(Long id) {
         return parentRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Parent", "id", id));
     }
 
-    private void fixMapping(UpdateParentDto dto, Parent mapped){
-        if(dto.getSchoolId() == null){
+    private void fixMapping(UpdateParentDto dto, Parent mapped) {
+        if (dto.getSchoolId() == null) {
             mapped.setSchool(null);
         }
     }

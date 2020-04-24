@@ -9,6 +9,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring", imports = {Collectors.class, Student.class})
@@ -48,4 +49,6 @@ public interface ParentMapper {
             )
     })
     Parent fromUpdateParentDtoToParent(UpdateParentDto dto);
+
+    List<ParentDto> fromParentsToParentsDto(List<Parent> parents);
 }

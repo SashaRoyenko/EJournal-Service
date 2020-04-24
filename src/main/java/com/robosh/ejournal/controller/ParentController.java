@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -39,7 +41,17 @@ public class ParentController {
 
     @ApiOperation("Find parent by id")
     @GetMapping("/{id}")
-    public ParentDto getById(@PathVariable Long id) {
+    public ParentDto getParentById(@PathVariable Long id) {
         return parentService.findById(id);
+    }
+
+    @ApiOperation("Find parents by school id")
+    @GetMapping
+    public List<ParentDto> getAllParentsBySchoolId(
+            @RequestParam Long id,
+            @RequestParam int page,
+            @RequestParam int size
+    ){
+        return parentService.findAllBySchoolId(id, page, size);
     }
 }
