@@ -54,6 +54,10 @@ public class ParentService {
 
     }
 
+    public ParentDto findById(Long id) {
+        return parentMapper.fromParentToParentDto(findParentById(id));
+    }
+
     private Parent findParentById(Long id) {
         return parentRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Parent", "id", id));
