@@ -2,6 +2,7 @@ package com.robosh.ejournal.data.mapping;
 
 import com.robosh.ejournal.data.dto.parent.ParentDto;
 import com.robosh.ejournal.data.dto.parent.SaveParentDto;
+import com.robosh.ejournal.data.dto.parent.UpdateParentDto;
 import com.robosh.ejournal.data.entity.Parent;
 import com.robosh.ejournal.data.entity.Student;
 import org.mapstruct.Mapper;
@@ -34,4 +35,17 @@ public interface ParentMapper {
             )
     })
     ParentDto fromParentToParentDto(Parent parent);
+
+    @Mappings({
+            @Mapping(source = "schoolId", target = "school.id"),
+            @Mapping(
+                    target = "studentList",
+                    expression = "java(dto.getStudentList().stream()" +
+                            ".map((id)-> Student.builder()" +
+                            ".id(id)" +
+                            ".build())" +
+                            ".collect(Collectors.toList()))"
+            )
+    })
+    Parent fromUpdateParentDtoToParent(UpdateParentDto dto);
 }
