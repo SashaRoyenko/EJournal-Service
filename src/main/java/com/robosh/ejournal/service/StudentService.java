@@ -11,10 +11,14 @@ import com.robosh.ejournal.util.validation.ValidatorProcessor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -55,6 +59,12 @@ public class StudentService {
         currentStudent = studentRepository.save(currentStudent);
         log.info("Student updated");
         return studentMapper.fromStudentToStudentDto(currentStudent);
+    }
+
+    public List<StudentDto> findBySchoolId(Long schoolId, int size, int page) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Student> paged = studentRepository.findAllBySchoolId(schoolId, pageable);
+        return studentMapper.fromStudentsToStudentsDto(paged.getContent());
     }
 
     private Student findStudentById(Long id) {

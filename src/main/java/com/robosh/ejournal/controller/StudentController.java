@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RequiredArgsConstructor
 @RequestMapping("/students")
@@ -40,5 +42,14 @@ public class StudentController {
     @PutMapping
     public StudentDto updateStudent(@RequestBody @Valid SaveStudentDto updateStudent) {
         return studentService.update(updateStudent);
+    }
+
+    @ApiOperation("Get students by schoolId")
+    @GetMapping
+    public List<StudentDto> getStudentsBySchoolId(
+            @RequestParam("page") int page,
+            @RequestParam("size") int size,
+            @RequestParam("schoolId") Long schoolId) {
+        return studentService.findBySchoolId(schoolId, size, page);
     }
 }
