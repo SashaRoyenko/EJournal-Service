@@ -1,6 +1,7 @@
 package config;
 
 import com.robosh.ejournal.data.mapping.AdminMapper;
+import com.robosh.ejournal.data.mapping.ParentMapper;
 import com.robosh.ejournal.data.mapping.SchoolMapper;
 import com.robosh.ejournal.data.mapping.StudentMapper;
 import org.mapstruct.factory.Mappers;
@@ -22,4 +23,7 @@ public class MapperConfiguration {
 
     @Bean
     public StudentMapper getStudentMapper(){return Mappers.getMapper(StudentMapper.class);}
+
+    @Bean
+    public ParentMapper getParentMapper(){return Mappers.getMapper(ParentMapper.class);}
 }

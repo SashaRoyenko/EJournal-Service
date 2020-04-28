@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
+@ToString(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "parent")
@@ -33,11 +35,11 @@ public class Parent extends User {
             String lastName,
             String email,
             String password,
-            String telephone,
+            String phone,
             School school,
             List<Student> studentList
     ) {
-        super(id, firstName, secondName, lastName, email, password, telephone, school);
+        super(id, firstName, secondName, lastName, email, password, phone, school);
         this.studentList = studentList;
     }
 }
