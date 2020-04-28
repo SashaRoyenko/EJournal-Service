@@ -55,7 +55,6 @@ public class ParentService {
         currentParent = parentRepository.save(currentParent);
         log.info("Parent updated");
         return parentMapper.fromParentToParentDto(currentParent);
-
     }
 
     public ParentDto findById(Long id) {
