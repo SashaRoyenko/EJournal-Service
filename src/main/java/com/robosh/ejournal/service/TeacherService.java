@@ -50,9 +50,25 @@ public class TeacherService {
         return teacherMapper.fromTeachersToTeachersDto(paged.getContent());
     }
 
+
+    public TeacherDto updateTeacher(SaveTeacherDto dto) {
+        Teacher currentTeacher = findTeacherById(dto.getId());
+        Teacher updateTeacher = teacherMapper.fromSaveTeacherDtoToTeacher(dto);
+
+        fixMapping(dto, updateTeacher);
+        modelMapper.map(updateTeacher, currentTeacher);
+        ValidatorProcessor.validate(currentTeacher);
+
+        currentTeacher = teacherRepository.save(currentTeacher);
+        log.info("teacher updated");
+        return teacherMapper.fromTeacherToTeacherDto(currentTeacher);
+    }
     private void fixMapping(SaveTeacherDto dto, Teacher teacher) {
         if (dto.getGroupId() == null) {
             teacher.setGroup(null);
+        }
+        if (dto.getSchoolId() == null) {
+            teacher.setSchool(null);
         }
     }
 
