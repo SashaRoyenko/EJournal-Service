@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -30,5 +32,14 @@ public class TeacherController {
     @GetMapping("/{id}")
     public TeacherDto findTeacherById(@PathVariable Long id) {
         return teacherService.findById(id);
+    }
+
+    @GetMapping
+    public List<TeacherDto> findTeachersBySchoolId(
+            @RequestParam("page") int page,
+            @RequestParam("size") int size,
+            @RequestParam("schoolId") Long schoolId
+    ) {
+        return teacherService.findAllBySchoolId(schoolId, page, size);
     }
 }

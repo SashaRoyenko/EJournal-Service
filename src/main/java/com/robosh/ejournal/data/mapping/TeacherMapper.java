@@ -7,6 +7,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface TeacherMapper {
     @Mappings({
@@ -18,4 +20,6 @@ public interface TeacherMapper {
             @Mapping(target = "group.id", source = "groupId"),
             @Mapping(target = "school.id", source = "schoolId")})
     Teacher fromSaveTeacherDtoToTeacher(SaveTeacherDto dto);
+
+    List<TeacherDto> fromTeachersToTeachersDto(List<Teacher> teachers);
 }

@@ -11,7 +11,12 @@ import com.robosh.ejournal.util.validation.ValidatorProcessor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @Slf4j
@@ -37,6 +42,12 @@ public class TeacherService {
 
     public TeacherDto findById(Long id) {
         return teacherMapper.fromTeacherToTeacherDto(findTeacherById(id));
+    }
+
+    public List<TeacherDto> findAllBySchoolId(Long id, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Teacher> paged = teacherRepository.findAllBySchoolId(id, pageable);
+        return teacherMapper.fromTeachersToTeachersDto(paged.getContent());
     }
 
     private void fixMapping(SaveTeacherDto dto, Teacher teacher) {
