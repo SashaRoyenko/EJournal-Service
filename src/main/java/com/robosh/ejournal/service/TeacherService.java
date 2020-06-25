@@ -30,7 +30,6 @@ public class TeacherService {
 
     public TeacherDto save(SaveTeacherDto dto) {
         Teacher teacher = teacherMapper.fromSaveTeacherDtoToTeacher(dto);
-        fixMapping(dto, teacher);
         teacher.setPassword(passwordGenerator.generateRandomPassword());
 
         ValidatorProcessor.validate(teacher);
@@ -55,21 +54,12 @@ public class TeacherService {
         Teacher currentTeacher = findTeacherById(dto.getId());
         Teacher updateTeacher = teacherMapper.fromSaveTeacherDtoToTeacher(dto);
 
-        fixMapping(dto, updateTeacher);
         modelMapper.map(updateTeacher, currentTeacher);
         ValidatorProcessor.validate(currentTeacher);
 
         currentTeacher = teacherRepository.save(currentTeacher);
         log.info("teacher updated");
         return teacherMapper.fromTeacherToTeacherDto(currentTeacher);
-    }
-    private void fixMapping(SaveTeacherDto dto, Teacher teacher) {
-        if (dto.getGroupId() == null) {
-            teacher.setGroup(null);
-        }
-        if (dto.getSchoolId() == null) {
-            teacher.setSchool(null);
-        }
     }
 
     private Teacher findTeacherById(Long id) {
