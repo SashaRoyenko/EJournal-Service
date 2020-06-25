@@ -33,12 +33,12 @@ public class Teacher extends User {
             String lastName,
             String email,
             String password,
-            String telephone,
+            String phone,
             School school,
             Group group,
             String description
     ) {
-        super(id, firstName, secondName, lastName, email, password, telephone, school);
+        super(id, firstName, secondName, lastName, email, password, phone, school);
         this.group = group;
         this.description = description;
     }

@@ -4,6 +4,7 @@ import com.robosh.ejournal.data.mapping.AdminMapper;
 import com.robosh.ejournal.data.mapping.ParentMapper;
 import com.robosh.ejournal.data.mapping.SchoolMapper;
 import com.robosh.ejournal.data.mapping.StudentMapper;
+import com.robosh.ejournal.data.mapping.TeacherMapper;
 import org.mapstruct.factory.Mappers;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -26,4 +27,9 @@ public class MapperConfiguration {
 
     @Bean
     public ParentMapper getParentMapper(){return Mappers.getMapper(ParentMapper.class);}
+
+    @Bean
+    public TeacherMapper getTeacherMapper() {
+        return Mappers.getMapper(TeacherMapper.class);
+    }
 }
