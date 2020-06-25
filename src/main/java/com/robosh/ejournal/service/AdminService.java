@@ -30,7 +30,6 @@ public class AdminService {
         Admin admin = adminMapper.fromSaveAdminDtoToAdmin(saveAdminDto);
         admin.setPassword(passwordGenerator.generateRandomPassword());
 
-        saveSchoolForAdmin(saveAdminDto, admin);
         ValidatorProcessor.validate(admin);
         adminRepository.save(admin);
         log.info("Admin saved");
@@ -42,7 +41,6 @@ public class AdminService {
         Admin currentAdmin = findAdminById(updateAdminDto.getId());
         Admin updateAdmin = adminMapper.fromSaveAdminDtoToAdmin(updateAdminDto);
 
-        saveSchoolForAdmin(updateAdminDto, updateAdmin);
         modelMapper.map(updateAdmin, currentAdmin);
 
         ValidatorProcessor.validate(currentAdmin);
@@ -62,11 +60,5 @@ public class AdminService {
     private Admin findAdminById(Long id) {
         return adminRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Admin", "id", id));
-    }
-
-    private void saveSchoolForAdmin(SaveAdminDto saveAdminDto, Admin admin) {
-        if (saveAdminDto.getSchoolId() == null) {
-            admin.setSchool(null);
-        }
     }
 }

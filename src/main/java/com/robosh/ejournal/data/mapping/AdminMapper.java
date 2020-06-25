@@ -2,14 +2,14 @@ package com.robosh.ejournal.data.mapping;
 
 import com.robosh.ejournal.data.dto.admin.AdminInfoDto;
 import com.robosh.ejournal.data.dto.admin.SaveAdminDto;
+import com.robosh.ejournal.data.entity.School;
 import com.robosh.ejournal.data.entity.admin.Admin;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", uses = SchoolMapper.class)
+@Mapper(componentModel = "spring", uses = SchoolMapper.class, imports = School.class)
 public interface AdminMapper {
 
     @Mapping(target = "password", ignore = true)
@@ -17,10 +17,10 @@ public interface AdminMapper {
 
     AdminInfoDto fromAdminToAdminInfoDto(Admin admin);
 
-    @Mappings({
-            @Mapping(source = "schoolId", target = "school.id")
-    })
-    Admin fromSaveAdminDtoToAdmin(SaveAdminDto adminDto);
+    @Mapping(target = "school",
+            expression = "java(saveAdminDto.getSchoolId() == null ? null : " +
+                    "School.builder().id(saveAdminDto.getSchoolId()).build())")
+    Admin fromSaveAdminDtoToAdmin(SaveAdminDto saveAdminDto);
 
     List<AdminInfoDto> fromAdminsToAdminsInfoDto(List<Admin> admins);
 }
